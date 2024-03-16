@@ -1,4 +1,4 @@
-package tech.shiker.encdecrypt;
+package tech.shiker.enccore;
 
 import com.intellij.openapi.options.Configurable;
 import org.jetbrains.annotations.Nls;

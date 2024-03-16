@@ -1,4 +1,4 @@
-package tech.shiker.encdecrypt;
+package tech.shiker.enccore;
 
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;

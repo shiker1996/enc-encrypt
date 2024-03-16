@@ -1,4 +1,4 @@
-package tech.shiker.encdecrypt;
+package tech.shiker.enccore;
 
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.vfs.VirtualFile;

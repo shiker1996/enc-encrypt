@@ -1,13 +1,19 @@
 package tech.shiker.common;
 
-public class DecryptConstant {
-    public static final String DECRYPT_TITLE = "ENC Decrypt Tool";
+public class SecurityConstant {
+    public static final String ENC_DECRYPT_TITLE = "ENC Decrypt Tool";
 
-    public static final String KEY_NULL_MESSAGE = "Decrypt key can't be null";
+    public static final String KEY_NULL_MESSAGE = "Security key can't be null";
 
-    public static final String KEY_INVALID_MESSAGE = "Decrypt key is invalid";
+    public static final String KEY_INVALID_MESSAGE = "Security key is invalid";
 
     public static final String DECRYPT_ERR_MESSAGE = "Decrypt error：%s, err:%s";
+
+    public static final String ENCRYPT_ERR_MESSAGE = "Encrypt error：%s, err:%s";
+
+    public static final String ENCRYPT_NULL_MESSAGE = "Please select some text to encrypt.";
+
+    public static final String ENCRYPT_RESULT = "ENC(%s)";
 
     public static final String UN_SUPPORT_MESSAGE = "Unsupported decrypt file!";
 
