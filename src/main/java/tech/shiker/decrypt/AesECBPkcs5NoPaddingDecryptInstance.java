@@ -2,7 +2,7 @@ package tech.shiker.decrypt;
 
 import org.codehaus.plexus.util.Base64;
 import tech.shiker.common.DecryptMethod;
-import tech.shiker.encdecrypt.DecryptResult;
+import tech.shiker.enccore.DecryptResult;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

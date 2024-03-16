@@ -1,4 +1,4 @@
-package tech.shiker.encdecrypt;
+package tech.shiker.enccore;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;

@@ -1,6 +1,6 @@
 package tech.shiker.decrypt;
 
-import tech.shiker.encdecrypt.DecryptResult;
+import tech.shiker.enccore.DecryptResult;
 
 public interface DecryptInstance {
 
