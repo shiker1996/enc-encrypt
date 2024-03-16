@@ -6,15 +6,11 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.components.JBScrollPane;
-import org.codehaus.plexus.util.Base64;
+import tech.shiker.common.DecryptConstant;
+import tech.shiker.common.DecryptMethod;
+import tech.shiker.page.ComparisonFrame;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +46,7 @@ public class DecryptEncAction extends AnAction {
         StringBuilder decryptedContent = new StringBuilder();
         StringBuilder originalContent = new StringBuilder();
         int lastEnd = 0;
+        StringBuilder message = new StringBuilder();
         while (matcher.find()) {
             int start = matcher.start();
             int end = matcher.end();
@@ -60,11 +57,15 @@ public class DecryptEncAction extends AnAction {
             if (!decryptResult.isDecryptError()) {
                 decryptedContent.append("<font color='green'>").append(decryptResult.decryptStr()).append("</font>");
             } else {
+                message.append(decryptResult.message()).append("\n");
                 decryptedContent.append("<font color='red'>").append(decryptResult.decryptStr()).append("</font>");
             }
             originalContent.append(text, lastEnd, start);
             originalContent.append("<font color='blue'>ENC(").append(encryptedText).append(")</font>");
             lastEnd = end; // 更新上次解密位置
+        }
+        if(!message.isEmpty()){
+            Messages.showMessageDialog(message.toString(), DecryptConstant.DECRYPT_TITLE, Messages.getInformationIcon());
         }
         decryptedContent.append(text, lastEnd, text.length());
         originalContent.append(text, lastEnd, text.length());
@@ -81,32 +82,26 @@ public class DecryptEncAction extends AnAction {
         try {
             // 判断Key是否正确
             if (DecryptedSettingState.getInstance().decryptedKey == null) {
-                Messages.showInfoMessage(DecryptConstant.KEY_NULL_MESSAGE, DecryptConstant.DECRYPT_TITLE);
-                return new DecryptResult("!!!!ERROR!!!", true);
+                return new DecryptResult("!!!!ERROR!!!", true, DecryptConstant.KEY_NULL_MESSAGE);
             }
             if (DecryptedSettingState.getInstance().decryptedType == null) {
-                Messages.showInfoMessage(DecryptConstant.TYPE_NULL_MESSAGE, DecryptConstant.DECRYPT_TITLE);
-                return new DecryptResult("!!!!ERROR!!!", true);
+                return new DecryptResult("!!!!ERROR!!!", true, DecryptConstant.TYPE_NULL_MESSAGE);
             }
             if (DecryptedSettingState.getInstance().decryptedInformation == null) {
-                Messages.showInfoMessage(DecryptConstant.INFORMATION_NULL_MESSAGE, DecryptConstant.DECRYPT_TITLE);
-                return new DecryptResult("!!!!ERROR!!!", true);
+                return new DecryptResult("!!!!ERROR!!!", true, DecryptConstant.INFORMATION_NULL_MESSAGE);
             }
             // 判断Key是否为16位
             if (DecryptedSettingState.getInstance().decryptedKey.length() != 16) {
                 Messages.showInfoMessage(DecryptConstant.KEY_INVALID_MESSAGE, DecryptConstant.DECRYPT_TITLE);
-                return new DecryptResult("!!!!ERROR!!!", true);
+                return new DecryptResult("!!!!ERROR!!!", true, DecryptConstant.KEY_INVALID_MESSAGE);
             }
-            byte[] raw = DecryptedSettingState.getInstance().decryptedKey.getBytes(StandardCharsets.UTF_8);
-            SecretKeySpec keySpec = new SecretKeySpec(raw, DecryptedSettingState.getInstance().decryptedType);
-            Cipher cipher = Cipher.getInstance(DecryptedSettingState.getInstance().decryptedInformation);
-            cipher.init(Cipher.DECRYPT_MODE, keySpec);
-            byte[] encrypted1 = new Base64().decode(sSrc.getBytes());//先用base64解密
-            byte[] original = cipher.doFinal(encrypted1);
-            return new DecryptResult(new String(original, StandardCharsets.UTF_8), false);
+            DecryptMethod decryptMethod = DecryptMethod.decryptMethod(DecryptedSettingState.getInstance().decryptedType, DecryptedSettingState.getInstance().decryptedInformation);
+            if (decryptMethod == null){
+                return new DecryptResult("!!!!ERROR!!!", true, DecryptConstant.DECRYPT_UNKNOWN_MESSAGE);
+            }
+            return decryptMethod.decryptInstance().decrypt(sSrc, DecryptedSettingState.getInstance().decryptedKey);
         } catch (Exception ex) {
-            Messages.showInfoMessage(String.format(DecryptConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()), DecryptConstant.DECRYPT_TITLE);
-            return new DecryptResult("!!!!ERROR!!!", true);
+            return new DecryptResult("!!!!ERROR!!!", true, String.format(DecryptConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }
     }
 }

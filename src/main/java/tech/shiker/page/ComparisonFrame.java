@@ -1,7 +1,8 @@
-package tech.shiker.encdecrypt;
+package tech.shiker.page;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBScrollPane;
+import tech.shiker.common.DecryptConstant;
 
 import javax.swing.*;
 import java.awt.*;

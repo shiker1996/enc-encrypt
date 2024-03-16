@@ -1,4 +1,4 @@
-package tech.shiker.encdecrypt;
+package tech.shiker.common;
 
 public class DecryptConstant {
     public static final String DECRYPT_TITLE = "ENC Decrypt Tool";
@@ -20,4 +20,6 @@ public class DecryptConstant {
     public static final String TYPE_NULL_MESSAGE = "Decrypt type can't be null";
 
     public static final String INFORMATION_NULL_MESSAGE = "Decrypt information can't be null";
+
+    public static final String DECRYPT_UNKNOWN_MESSAGE = "Decrypt type is not supported, please check it or contract me!";
 }
