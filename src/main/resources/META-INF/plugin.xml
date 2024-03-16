@@ -5,7 +5,7 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Enc-decrypt</name>
+    <name>ENC Decrypt Tool</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="1159181016@qq.com" url="https://shiker.tech">橙序员</vendor>
@@ -24,12 +24,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable parentId="tools" instance="tech.shiker.encdecrypt.DecryptedToolConfigurable"
                                  id="org.intellij.sdk.settings.AppSettingsConfigurable"
-                                 displayName="SDK: Application Settings Example"/>
+                                 displayName="ENC Decrypt Tool"/>
         <applicationService serviceImplementation="tech.shiker.encdecrypt.DecryptedSettingState"/>
     </extensions>
     <actions>
-        <action id="decrypt-decrypt" class="tech.shiker.encdecrypt.DecryptEncAction" text="解密ENC字符串"
-                description="解密ENC字符串">
+        <action id="decrypt-decrypt" class="tech.shiker.encdecrypt.DecryptEncAction" text="ENC Decrypt"
+                description="ENC Decrypt">
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
         </action>
     </actions>

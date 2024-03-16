@@ -74,30 +74,7 @@ public class DecryptEncAction extends AnAction {
     }
 
     private void showComparisonWindow(VirtualFile originalFile, VirtualFile decryptedFile) throws IOException {
-        JFrame frame = new JFrame(originalFile.getName());
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(800, 600);
-        JEditorPane originalArea = new JEditorPane();
-        originalArea.setContentType(DecryptConstant.CONTENT_TYPE);
-        originalArea.setText(new String(originalFile.contentsToByteArray()));
-        JBScrollPane originalScrollPane = new JBScrollPane(originalArea);
-
-        JEditorPane decryptedArea = new JEditorPane();
-        decryptedArea.setContentType(DecryptConstant.CONTENT_TYPE);
-        decryptedArea.setText(new String(decryptedFile.contentsToByteArray()));
-        JBScrollPane decryptedScrollPane = new JBScrollPane(decryptedArea);
-
-        BoundedRangeModel scrollModel = new DefaultBoundedRangeModel();
-        originalScrollPane.getVerticalScrollBar().setModel(scrollModel);
-        decryptedScrollPane.getVerticalScrollBar().setModel(scrollModel);
-
-        JPanel panel = new JPanel(new GridLayout(1, 2));
-        panel.add(originalScrollPane);
-        panel.add(decryptedScrollPane);
-        frame.add(panel);
-
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        new ComparisonFrame(originalFile, decryptedFile);
     }
 
     public DecryptResult decrypt(String sSrc) {
@@ -105,6 +82,14 @@ public class DecryptEncAction extends AnAction {
             // 判断Key是否正确
             if (DecryptedSettingState.getInstance().decryptedKey == null) {
                 Messages.showInfoMessage(DecryptConstant.KEY_NULL_MESSAGE, DecryptConstant.DECRYPT_TITLE);
+                return new DecryptResult("!!!!ERROR!!!", true);
+            }
+            if (DecryptedSettingState.getInstance().decryptedType == null) {
+                Messages.showInfoMessage(DecryptConstant.TYPE_NULL_MESSAGE, DecryptConstant.DECRYPT_TITLE);
+                return new DecryptResult("!!!!ERROR!!!", true);
+            }
+            if (DecryptedSettingState.getInstance().decryptedInformation == null) {
+                Messages.showInfoMessage(DecryptConstant.INFORMATION_NULL_MESSAGE, DecryptConstant.DECRYPT_TITLE);
                 return new DecryptResult("!!!!ERROR!!!", true);
             }
             // 判断Key是否为16位
