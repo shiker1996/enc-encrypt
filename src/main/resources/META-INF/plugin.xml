@@ -1,0 +1,36 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>tech.shiker.enc-decrypt</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Enc-decrypt</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="1159181016@qq.com" url="https://shiker.tech">橙序员</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[ENC 解密工具，可以对使用 <a href="http://www.jasypt.org/">jasypt</a> 的配置文件解密，当你的项目中使用<a href="http://www.jasypt.org/">jasypt</a>时，你可以使用该插件进行文件验证  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable parentId="tools" instance="tech.shiker.encdecrypt.DecryptedToolConfigurable"
+                                 id="org.intellij.sdk.settings.AppSettingsConfigurable"
+                                 displayName="SDK: Application Settings Example"/>
+        <applicationService serviceImplementation="tech.shiker.encdecrypt.DecryptedSettingState"/>
+    </extensions>
+    <actions>
+        <action id="decrypt-decrypt" class="tech.shiker.encdecrypt.DecryptEncAction" text="解密ENC字符串"
+                description="解密ENC字符串">
+            <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
