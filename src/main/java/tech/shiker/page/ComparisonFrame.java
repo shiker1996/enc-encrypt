@@ -2,7 +2,7 @@ package tech.shiker.page;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBScrollPane;
-import tech.shiker.common.DecryptConstant;
+import tech.shiker.common.SecurityConstant;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +17,13 @@ public class ComparisonFrame extends JFrame {
 
         // 创建原始文件的文本区域和滚动面板
         JEditorPane originalArea = new JEditorPane();
-        originalArea.setContentType(DecryptConstant.CONTENT_TYPE);
+        originalArea.setContentType(SecurityConstant.CONTENT_TYPE);
         originalArea.setText(new String(originalFile.contentsToByteArray()));
         JBScrollPane originalScrollPane = new JBScrollPane(originalArea);
 
         // 创建解密文件的文本区域和滚动面板
         JEditorPane decryptedArea = new JEditorPane();
-        decryptedArea.setContentType(DecryptConstant.CONTENT_TYPE);
+        decryptedArea.setContentType(SecurityConstant.CONTENT_TYPE);
         decryptedArea.setText(new String(decryptedFile.contentsToByteArray()));
         JBScrollPane decryptedScrollPane = new JBScrollPane(decryptedArea);
 
@@ -32,13 +32,13 @@ public class ComparisonFrame extends JFrame {
 
         // 创建标题面板并添加标题
         JPanel originalTitlePanel = new JPanel(new BorderLayout());
-        JLabel originalTitleLabel = new JLabel(DecryptConstant.ORIGINAL_FILE_TITLE);
+        JLabel originalTitleLabel = new JLabel(SecurityConstant.ORIGINAL_FILE_TITLE);
         originalTitleLabel.setFont(titleFont);
         originalTitlePanel.add(originalTitleLabel, BorderLayout.NORTH);
         originalTitlePanel.add(originalScrollPane, BorderLayout.CENTER);
 
         JPanel decryptedTitlePanel = new JPanel(new BorderLayout());
-        JLabel decryptedTitleLabel = new JLabel(DecryptConstant.DECRYPT_FILE_TITLE);
+        JLabel decryptedTitleLabel = new JLabel(SecurityConstant.DECRYPT_FILE_TITLE);
         decryptedTitleLabel.setFont(titleFont);
         decryptedTitlePanel.add(decryptedTitleLabel, BorderLayout.NORTH);
         decryptedTitlePanel.add(decryptedScrollPane, BorderLayout.CENTER);

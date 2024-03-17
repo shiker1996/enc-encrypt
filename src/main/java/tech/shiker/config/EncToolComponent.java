@@ -1,4 +1,4 @@
-package tech.shiker.enccore;
+package tech.shiker.config;
 
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-public class DecryptedToolComponent {
+public class EncToolComponent {
 
 
     private final JPanel myMainPanel;
@@ -15,7 +15,7 @@ public class DecryptedToolComponent {
     private final JBTextField decryptedKeyText = new JBTextField("hi World Decrypt");
     private final JBTextField decryptedInformation = new JBTextField("AES/ECB/PKCS5Padding");
 
-    public DecryptedToolComponent() {
+    public EncToolComponent() {
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Enter decrypted type: "), decryptedTypeText, 1, false)
                 .addLabeledComponent(new JBLabel("Enter decrypted key:"), decryptedKeyText, 1, false)
