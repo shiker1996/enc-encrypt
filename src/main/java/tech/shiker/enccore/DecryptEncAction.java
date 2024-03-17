@@ -8,6 +8,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.common.SecurityMethod;
+import tech.shiker.config.EncSettingState;
 import tech.shiker.page.ComparisonFrame;
 
 import java.io.IOException;
@@ -81,25 +82,25 @@ public class DecryptEncAction extends AnAction {
     public DecryptResult decrypt(String sSrc) {
         try {
             // 判断Key是否正确
-            if (DecryptedSettingState.getInstance().decryptedKey == null) {
+            if (EncSettingState.getInstance().decryptedKey == null) {
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_NULL_MESSAGE);
             }
-            if (DecryptedSettingState.getInstance().decryptedType == null) {
+            if (EncSettingState.getInstance().decryptedType == null) {
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.TYPE_NULL_MESSAGE);
             }
-            if (DecryptedSettingState.getInstance().decryptedInformation == null) {
+            if (EncSettingState.getInstance().decryptedInformation == null) {
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.INFORMATION_NULL_MESSAGE);
             }
             // 判断Key是否为16位
-            if (DecryptedSettingState.getInstance().decryptedKey.length() != 16) {
+            if (EncSettingState.getInstance().decryptedKey.length() != 16) {
                 Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
             }
-            SecurityMethod securityMethod = SecurityMethod.decryptMethod(DecryptedSettingState.getInstance().decryptedType, DecryptedSettingState.getInstance().decryptedInformation);
+            SecurityMethod securityMethod = SecurityMethod.decryptMethod(EncSettingState.getInstance().decryptedType, EncSettingState.getInstance().decryptedInformation);
             if (securityMethod == null){
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
             }
-            return securityMethod.decryptInstance().decrypt(sSrc, DecryptedSettingState.getInstance().decryptedKey);
+            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey);
         } catch (Exception ex) {
             return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }

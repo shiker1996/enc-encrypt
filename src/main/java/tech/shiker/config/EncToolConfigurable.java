@@ -1,4 +1,4 @@
-package tech.shiker.enccore;
+package tech.shiker.config;
 
 import com.intellij.openapi.options.Configurable;
 import org.jetbrains.annotations.Nls;
@@ -6,9 +6,9 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class DecryptedToolConfigurable implements Configurable {
+public class EncToolConfigurable implements Configurable {
 
-    private DecryptedToolComponent mySettingsComponent;
+    private EncToolComponent mySettingsComponent;
 
     // A default constructor with no arguments is required because this implementation
     // is registered in an applicationConfigurable EP
@@ -27,13 +27,13 @@ public class DecryptedToolConfigurable implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        mySettingsComponent = new DecryptedToolComponent();
+        mySettingsComponent = new EncToolComponent();
         return mySettingsComponent.getPanel();
     }
 
     @Override
     public boolean isModified() {
-        DecryptedSettingState settings = DecryptedSettingState.getInstance();
+        EncSettingState settings = EncSettingState.getInstance();
         boolean modified = !mySettingsComponent.getDecryptedType().equals(settings.decryptedKey);
         modified |= !mySettingsComponent.getDecryptedKey().equals(settings.decryptedKey);
         modified |= !mySettingsComponent.getDecryptedInformation().equals(settings.decryptedInformation);
@@ -42,7 +42,7 @@ public class DecryptedToolConfigurable implements Configurable {
 
     @Override
     public void apply() {
-        DecryptedSettingState settings = DecryptedSettingState.getInstance();
+        EncSettingState settings = EncSettingState.getInstance();
         settings.decryptedType = mySettingsComponent.getDecryptedType();
         settings.decryptedKey = mySettingsComponent.getDecryptedKey();
         settings.decryptedInformation = mySettingsComponent.getDecryptedInformation();
@@ -50,7 +50,7 @@ public class DecryptedToolConfigurable implements Configurable {
 
     @Override
     public void reset() {
-        DecryptedSettingState settings = DecryptedSettingState.getInstance();
+        EncSettingState settings = EncSettingState.getInstance();
         mySettingsComponent.setDecryptedKeyText(settings.decryptedKey);
         mySettingsComponent.setDecryptedTypeText(settings.decryptedType);
         mySettingsComponent.setDecryptedInformation(settings.decryptedInformation);

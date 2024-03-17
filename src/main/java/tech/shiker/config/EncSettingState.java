@@ -1,4 +1,4 @@
-package tech.shiker.enccore;
+package tech.shiker.config;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -12,24 +12,24 @@ import org.jetbrains.annotations.Nullable;
         name = "org.intellij.sdk.settings.AppSettingsState",
         storages = @Storage("SdkSettingsPlugin.xml")
 )
-final class DecryptedSettingState implements PersistentStateComponent<DecryptedSettingState> {
+public final class EncSettingState implements PersistentStateComponent<EncSettingState> {
 
     public String decryptedType = "AES";
     public String decryptedKey = "hi World Decrypt";
     public String decryptedInformation = "AES/ECB/PKCS5Padding";
 
-    static DecryptedSettingState getInstance() {
-        return ApplicationManager.getApplication().getService(DecryptedSettingState.class);
+    public static EncSettingState getInstance() {
+        return ApplicationManager.getApplication().getService(EncSettingState.class);
     }
 
     @Nullable
     @Override
-    public DecryptedSettingState getState() {
+    public EncSettingState getState() {
         return this;
     }
 
     @Override
-    public void loadState(@NotNull DecryptedSettingState state) {
+    public void loadState(@NotNull EncSettingState state) {
         XmlSerializerUtil.copyBean(state, this);
     }
 

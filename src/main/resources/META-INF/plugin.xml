@@ -28,10 +28,10 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable parentId="tools" instance="tech.shiker.enccore.DecryptedToolConfigurable"
+        <applicationConfigurable parentId="tools" instance="tech.shiker.config.EncToolConfigurable"
                                  id="org.intellij.sdk.settings.AppSettingsConfigurable"
                                  displayName="ENC Decrypt Tool"/>
-        <applicationService serviceImplementation="tech.shiker.enccore.DecryptedSettingState"/>
+        <applicationService serviceImplementation="tech.shiker.config.EncSettingState"/>
     </extensions>
     <actions>
         <action id="enc-decrypt" class="tech.shiker.enccore.DecryptEncAction" text="ENC Decrypt"
