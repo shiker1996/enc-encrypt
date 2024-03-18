@@ -4,8 +4,11 @@ The ENC decryption tool, which can decrypt configuration files using <a href="ht
 
 # Feature
 1. Feature 1 - decrypt
+
    ![demo](img/decrypt.png)
+
 2. Feature 2 - encrypt
+
    ![demo2](img/encrypt.gif)
 
 # Attention!!!
