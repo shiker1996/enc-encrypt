@@ -1,7 +1,6 @@
 plugins {
     id("java")
     id("org.jetbrains.intellij") version "1.16.0"
-    id 'maven-publish'
 }
 
 group = "tech.shiker"
@@ -36,17 +35,4 @@ patchPluginXml {
     //注意这个版本号不能高于上面intellij的version,否则runIde会报错
     sinceBuild = '231'
     untilBuild = '241.*'
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/shiker1996/enc-encrypt"
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
 }
