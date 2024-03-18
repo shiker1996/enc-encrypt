@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import tech.shiker.common.SecurityConstant;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.io.IOException;
 
@@ -26,6 +27,10 @@ public class ComparisonFrame extends JFrame {
         decryptedArea.setContentType(SecurityConstant.CONTENT_TYPE);
         decryptedArea.setText(new String(decryptedFile.contentsToByteArray()));
         JBScrollPane decryptedScrollPane = new JBScrollPane(decryptedArea);
+
+        BoundedRangeModel scrollModel = new DefaultBoundedRangeModel();
+        originalScrollPane.getVerticalScrollBar().setModel(scrollModel);
+        decryptedScrollPane.getVerticalScrollBar().setModel(scrollModel);
 
         // 创建标题字体
         Font titleFont = new Font(Font.SANS_SERIF, Font.BOLD, 16);

@@ -71,7 +71,9 @@ public class DecryptEncAction extends AnAction {
         decryptedContent.append(text, lastEnd, text.length());
         originalContent.append(text, lastEnd, text.length());
         String decryptedStr = decryptedContent.toString().replace("\n", "<br>");
+        decryptedStr = decryptedStr.replace(" ", "&nbsp;");
         String originalStr = originalContent.toString().replace("\n", "<br>");
+        originalStr = originalStr.replace(" ", "&nbsp;");
         showComparisonWindow(new DecryptedVirtualFile(virtualFile, originalStr), new DecryptedVirtualFile(virtualFile, decryptedStr));
     }
 
