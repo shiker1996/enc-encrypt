@@ -1,11 +1,14 @@
 package tech.shiker.common;
 
 import tech.shiker.security.AesECBPkcs5NoPaddingSecurityInstance;
+import tech.shiker.security.AesECBZeroNoPaddingSecurityInstance;
 import tech.shiker.security.SecurityInstance;
 
 public enum SecurityMethod {
 
-    AES_ECB_PKCS5_NO_PADDING("AES", "AES/ECB/PKCS5Padding", new AesECBPkcs5NoPaddingSecurityInstance());
+    AES_ECB_PKCS5_NO_PADDING("AES", "AES/ECB/PKCS5Padding", new AesECBPkcs5NoPaddingSecurityInstance()),
+    AES_ECB_ZERO_NO_PADDING("AES", "AES/ECB/NoPadding", new AesECBZeroNoPaddingSecurityInstance()),
+    ;
 
     private final String decryptType;
 
