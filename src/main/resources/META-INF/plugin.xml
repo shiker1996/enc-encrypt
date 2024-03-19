@@ -35,8 +35,7 @@
 </li>
 
 </ol>
-<h1>Attention!!!</h1>
-<p>As you have used, the current decryption method supports the ECB/PKCS5NoPadding method in AES. If you use other encryption methods or KMS, it is not supported yet. Hope you can contribute your code to this project!</p>
+
 ]]></description>
 
     <!-- Product and plugin compatibility requirements.
