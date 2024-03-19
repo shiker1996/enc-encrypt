@@ -102,7 +102,7 @@ public class DecryptEncAction extends AnAction {
             if (securityMethod == null){
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
             }
-            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey);
+            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi);
         } catch (Exception ex) {
             return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }

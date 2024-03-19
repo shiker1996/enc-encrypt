@@ -1,13 +1,22 @@
 package tech.shiker.common;
 
-import tech.shiker.security.AesECBPkcs5NoPaddingSecurityInstance;
+import tech.shiker.security.AesCBCNoPaddingSecurityInstance;
+import tech.shiker.security.AesCBCPkcs5PaddingSecurityInstance;
+import tech.shiker.security.AesECBPkcs5PaddingSecurityInstance;
 import tech.shiker.security.AesECBZeroNoPaddingSecurityInstance;
 import tech.shiker.security.SecurityInstance;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public enum SecurityMethod {
 
-    AES_ECB_PKCS5_NO_PADDING("AES", "AES/ECB/PKCS5Padding", new AesECBPkcs5NoPaddingSecurityInstance()),
+    AES_ECB_PKCS5_PADDING("AES", "AES/ECB/PKCS5Padding", new AesECBPkcs5PaddingSecurityInstance()),
     AES_ECB_ZERO_NO_PADDING("AES", "AES/ECB/NoPadding", new AesECBZeroNoPaddingSecurityInstance()),
+    AES_CBC_PKCS5_PADDING("AES", "AES/CBC/PKCS5Padding", new AesCBCPkcs5PaddingSecurityInstance()),
+    AES_CBC_ZERO_NO_PADDING("AES", "AES/CBC/NoPadding", new AesCBCNoPaddingSecurityInstance()),
     ;
 
     private final String decryptType;
@@ -41,5 +50,13 @@ public enum SecurityMethod {
                 return securityMethod;
         }
         return null;
+    }
+
+    public static Set<String> getAllDecryptType(){
+        return Arrays.stream(SecurityMethod.values()).map(SecurityMethod::decryptType).collect(Collectors.toSet());
+    }
+
+    public static List<String> getAllDecryptInformation(){
+        return Arrays.stream(SecurityMethod.values()).map(SecurityMethod::decryptInformation).collect(Collectors.toList());
     }
 }

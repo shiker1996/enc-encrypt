@@ -37,6 +37,7 @@ public class EncToolConfigurable implements Configurable {
         boolean modified = !mySettingsComponent.getDecryptedType().equals(settings.decryptedKey);
         modified |= !mySettingsComponent.getDecryptedKey().equals(settings.decryptedKey);
         modified |= !mySettingsComponent.getDecryptedInformation().equals(settings.decryptedInformation);
+        modified |= !mySettingsComponent.getDecryptedIv().equals(settings.decryptedVi);
         return modified;
     }
 
@@ -46,6 +47,7 @@ public class EncToolConfigurable implements Configurable {
         settings.decryptedType = mySettingsComponent.getDecryptedType();
         settings.decryptedKey = mySettingsComponent.getDecryptedKey();
         settings.decryptedInformation = mySettingsComponent.getDecryptedInformation();
+        settings.decryptedVi = mySettingsComponent.getDecryptedIv();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class EncToolConfigurable implements Configurable {
         mySettingsComponent.setDecryptedKeyText(settings.decryptedKey);
         mySettingsComponent.setDecryptedTypeText(settings.decryptedType);
         mySettingsComponent.setDecryptedInformation(settings.decryptedInformation);
+        mySettingsComponent.setDecryptedIv(settings.decryptedVi);
     }
 
     @Override
