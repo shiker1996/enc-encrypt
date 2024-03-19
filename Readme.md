@@ -16,6 +16,4 @@ The ENC decryption tool, which can decrypt configuration files using <a href="ht
    - AES/CBC/PKCS5Padding
    - AES/CBC/NoPadding
 
-# Attention!!!
 
-As you have used, the current decryption method supports the ECB/PKCS5NoPadding method in AES. If you use other encryption methods or KMS, it is not supported yet. Hope you can contribute your code to this project!
