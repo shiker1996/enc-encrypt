@@ -7,6 +7,10 @@ public class SecurityConstant {
 
     public static final String KEY_INVALID_MESSAGE = "Security key is invalid";
 
+    public static final String IV_NULL_MESSAGE = "Security iv can't be null";
+
+    public static final String IV_INVALID_MESSAGE = "Security iv is invalid";
+
     public static final String DECRYPT_ERR_MESSAGE = "Decrypt error：%s, err:%s";
 
     public static final String ENCRYPT_ERR_MESSAGE = "Encrypt error：%s, err:%s";

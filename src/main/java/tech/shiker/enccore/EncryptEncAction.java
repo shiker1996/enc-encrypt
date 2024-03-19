@@ -58,22 +58,22 @@ public class EncryptEncAction extends AnAction {
             if (EncSettingState.getInstance().decryptedKey == null) {
                 return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_NULL_MESSAGE);
             }
+            // 判断Key是否为16位
+            if (EncSettingState.getInstance().decryptedKey.length() != 16) {
+                Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
+                return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
+            }
             if (EncSettingState.getInstance().decryptedType == null) {
                 return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.TYPE_NULL_MESSAGE);
             }
             if (EncSettingState.getInstance().decryptedInformation == null) {
                 return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.INFORMATION_NULL_MESSAGE);
             }
-            // 判断Key是否为16位
-            if (EncSettingState.getInstance().decryptedKey.length() != 16) {
-                Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
-                return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
-            }
             SecurityMethod securityMethod = SecurityMethod.decryptMethod(EncSettingState.getInstance().decryptedType, EncSettingState.getInstance().decryptedInformation);
             if (securityMethod == null) {
                 return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
             }
-            return securityMethod.decryptInstance().encrypt(sSrc, EncSettingState.getInstance().decryptedKey);
+            return securityMethod.decryptInstance().encrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi);
         } catch (Exception ex) {
             return new EncryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.ENCRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }

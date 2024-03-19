@@ -28,6 +28,8 @@
 <ul>
 <li>AES/ECB/PKCS5Padding</li>
 <li>AES/ECB/NoPadding</li>
+<li>AES/CBC/PKCS5Padding</li>
+<li>AES/CBC/NoPadding</li>
 
 </ul>
 </li>

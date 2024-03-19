@@ -13,6 +13,8 @@ The ENC decryption tool, which can decrypt configuration files using <a href="ht
 3. Supported algorithm:
    - AES/ECB/PKCS5Padding
    - AES/ECB/NoPadding
+   - AES/CBC/PKCS5Padding
+   - AES/CBC/NoPadding
 
 # Attention!!!
 
