@@ -19,10 +19,10 @@
 <h1>Feature</h1>
 <ol>
 <li><p>Feature 1 - decrypt</p>
-<p><img src="https://github.com/shiker1996/enc-encrypt/blob/master/img/decrypt.png" referrerpolicy="no-referrer" alt="demo"></p>
+<p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/decrypt.png" referrerpolicy="no-referrer" alt="demo"></p>
 </li>
 <li><p>Feature 2 - encrypt</p>
-<p><img src="https://github.com/shiker1996/enc-encrypt/blob/master/img/encrypt.gif" referrerpolicy="no-referrer" alt="demo2"></p>
+<p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/encrypt.gif" referrerpolicy="no-referrer" alt="demo2"></p>
 </li>
 <li><p>Supported algorithm:</p>
 <ul>
