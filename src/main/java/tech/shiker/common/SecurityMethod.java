@@ -3,7 +3,11 @@ package tech.shiker.common;
 import tech.shiker.security.AesCBCNoPaddingSecurityInstance;
 import tech.shiker.security.AesCBCPkcs5PaddingSecurityInstance;
 import tech.shiker.security.AesECBPkcs5PaddingSecurityInstance;
-import tech.shiker.security.AesECBZeroNoPaddingSecurityInstance;
+import tech.shiker.security.AesECBNoPaddingSecurityInstance;
+import tech.shiker.security.DesCBCNoPaddingSecurityInstance;
+import tech.shiker.security.DesCBCPkcs5PaddingSecurityInstance;
+import tech.shiker.security.DesECBNoPaddingSecurityInstance;
+import tech.shiker.security.DesECBPkcs5PaddingSecurityInstance;
 import tech.shiker.security.SecurityInstance;
 
 import java.util.Arrays;
@@ -14,9 +18,13 @@ import java.util.stream.Collectors;
 public enum SecurityMethod {
 
     AES_ECB_PKCS5_PADDING("AES", "AES/ECB/PKCS5Padding", new AesECBPkcs5PaddingSecurityInstance()),
-    AES_ECB_ZERO_NO_PADDING("AES", "AES/ECB/NoPadding", new AesECBZeroNoPaddingSecurityInstance()),
+    AES_ECB_NO_PADDING("AES", "AES/ECB/NoPadding", new AesECBNoPaddingSecurityInstance()),
     AES_CBC_PKCS5_PADDING("AES", "AES/CBC/PKCS5Padding", new AesCBCPkcs5PaddingSecurityInstance()),
-    AES_CBC_ZERO_NO_PADDING("AES", "AES/CBC/NoPadding", new AesCBCNoPaddingSecurityInstance()),
+    AES_CBC_NO_PADDING("AES", "AES/CBC/NoPadding", new AesCBCNoPaddingSecurityInstance()),
+    DES_ECB_PKCS5_PADDING("DESede", "DESede/ECB/PKCS5Padding", new DesECBPkcs5PaddingSecurityInstance()),
+    DES_ECB_NO_PADDING("DESede", "DESede/ECB/NoPadding", new DesECBNoPaddingSecurityInstance()),
+    DES_CBC_PKCS5_PADDING("DESede", "DESede/CBC/PKCS5Padding", new DesCBCPkcs5PaddingSecurityInstance()),
+    DES_CBC_NO_PADDING("DESede", "DESede/CBC/NoPadding", new DesCBCNoPaddingSecurityInstance()),
     ;
 
     private final String decryptType;
