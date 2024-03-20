@@ -93,11 +93,6 @@ public class DecryptEncAction extends AnAction {
             if (EncSettingState.getInstance().decryptedInformation == null) {
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.INFORMATION_NULL_MESSAGE);
             }
-            // 判断Key是否为16位
-            if (EncSettingState.getInstance().decryptedKey.length() != 16) {
-                Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
-                return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
-            }
             SecurityMethod securityMethod = SecurityMethod.decryptMethod(EncSettingState.getInstance().decryptedType, EncSettingState.getInstance().decryptedInformation);
             if (securityMethod == null){
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);

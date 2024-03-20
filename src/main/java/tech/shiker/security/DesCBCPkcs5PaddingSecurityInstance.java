@@ -12,10 +12,11 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
+public class DesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
     @Override
     public EncryptResult encrypt(String src, String key, String index) throws Exception {
-        if (key.length() != 16) {
+        // 判断Key是否为16位
+        if (key.length() != 24) {
             Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
@@ -24,12 +25,12 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_NULL_MESSAGE);
         }
         // 判断Key是否为16位
-        if (index.length() != 16) {
+        if (index.length() != 8) {
             Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_INVALID_MESSAGE);
         }
-        Cipher cipher = Cipher.getInstance(SecurityMethod.AES_CBC_PKCS5_PADDING.decryptInformation());
-        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SecurityMethod.AES_CBC_PKCS5_PADDING.decryptType());
+        Cipher cipher = Cipher.getInstance(SecurityMethod.DES_CBC_PKCS5_PADDING.decryptInformation());
+        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SecurityMethod.DES_CBC_PKCS5_PADDING.decryptType());
         IvParameterSpec iv = new IvParameterSpec(index.getBytes(StandardCharsets.UTF_8));
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, iv);
         byte[] encryptedBytes = cipher.doFinal(src.getBytes());
@@ -39,7 +40,7 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
     @Override
     public DecryptResult decrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
-        if (key.length() != 16) {
+        if (key.length() != 24) {
             Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
@@ -48,12 +49,12 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_NULL_MESSAGE);
         }
         // 判断Key是否为16位
-        if (index.length() != 16) {
+        if (index.length() != 8) {
             Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_INVALID_MESSAGE);
         }
-        Cipher cipher = Cipher.getInstance(SecurityMethod.AES_CBC_PKCS5_PADDING.decryptInformation());
-        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SecurityMethod.AES_CBC_PKCS5_PADDING.decryptType());
+        Cipher cipher = Cipher.getInstance(SecurityMethod.DES_CBC_PKCS5_PADDING.decryptInformation());
+        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SecurityMethod.DES_CBC_PKCS5_PADDING.decryptType());
         IvParameterSpec iv = new IvParameterSpec(index.getBytes(StandardCharsets.UTF_8));
         cipher.init(Cipher.DECRYPT_MODE, keySpec, iv);
         byte[] encryptedBytes = Base64.getDecoder().decode(src);

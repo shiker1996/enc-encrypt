@@ -30,7 +30,10 @@
 <li>AES/ECB/NoPadding</li>
 <li>AES/CBC/PKCS5Padding</li>
 <li>AES/CBC/NoPadding</li>
-
+<li>DESede/ECB/PKCS5Padding</li>
+<li>DESede/ECB/NoPadding</li>
+<li>DESede/CBC/PKCS5Padding</li>
+<li>DESede/CBC/NoPadding</li>
 </ul>
 </li>
 

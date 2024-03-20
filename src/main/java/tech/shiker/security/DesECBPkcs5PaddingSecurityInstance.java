@@ -11,17 +11,16 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class AesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
-
+public class DesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
     public EncryptResult encrypt(String src, String encryptedKey) throws Exception {
         // 判断Key是否为16位
-        if (encryptedKey.length() != 16) {
+        if (encryptedKey.length() != 24) {
             Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
-        Cipher cipher = Cipher.getInstance(SecurityMethod.AES_ECB_PKCS5_PADDING.decryptInformation());
+        Cipher cipher = Cipher.getInstance(SecurityMethod.DES_ECB_PKCS5_PADDING.decryptInformation());
         byte[] raw = encryptedKey.getBytes(StandardCharsets.UTF_8);
-        SecretKeySpec keySpec = new SecretKeySpec(raw, SecurityMethod.AES_ECB_PKCS5_PADDING.decryptType());
+        SecretKeySpec keySpec = new SecretKeySpec(raw, SecurityMethod.DES_ECB_PKCS5_PADDING.decryptType());
         cipher.init(Cipher.ENCRYPT_MODE, keySpec);
         byte[] encryptedBytes = cipher.doFinal(src.getBytes());
         return new EncryptResult(Base64.getEncoder().encodeToString(encryptedBytes), false, null);
@@ -34,13 +33,13 @@ public class AesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
 
     public DecryptResult decrypt(String src, String decryptedKey) throws Exception{
         // 判断Key是否为16位
-        if (decryptedKey.length() != 16) {
+        if (decryptedKey.length() != 24) {
             Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         byte[] raw = decryptedKey.getBytes(StandardCharsets.UTF_8);
-        SecretKeySpec keySpec = new SecretKeySpec(raw, SecurityMethod.AES_ECB_PKCS5_PADDING.decryptType());
-        Cipher cipher = Cipher.getInstance(SecurityMethod.AES_ECB_PKCS5_PADDING.decryptInformation());
+        SecretKeySpec keySpec = new SecretKeySpec(raw, SecurityMethod.DES_ECB_PKCS5_PADDING.decryptType());
+        Cipher cipher = Cipher.getInstance(SecurityMethod.DES_ECB_PKCS5_PADDING.decryptInformation());
         cipher.init(Cipher.DECRYPT_MODE, keySpec);
         byte[] encryptedBytes = Base64.getDecoder().decode(src);
         byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
