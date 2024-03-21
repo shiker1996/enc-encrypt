@@ -15,7 +15,6 @@ public class DesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
     public EncryptResult encrypt(String src, String encryptedKey) throws Exception {
         // 判断Key是否为16位
         if (encryptedKey.length() != 24) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.DES_ECB_PKCS5_PADDING.decryptInformation());
@@ -34,7 +33,6 @@ public class DesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
     public DecryptResult decrypt(String src, String decryptedKey) throws Exception{
         // 判断Key是否为16位
         if (decryptedKey.length() != 24) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         byte[] raw = decryptedKey.getBytes(StandardCharsets.UTF_8);

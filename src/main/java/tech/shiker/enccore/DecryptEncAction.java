@@ -1,5 +1,8 @@
 package tech.shiker.enccore;
 
+import com.intellij.diff.DiffContentFactory;
+import com.intellij.diff.DiffManager;
+import com.intellij.diff.requests.SimpleDiffRequest;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -24,7 +27,11 @@ public class DecryptEncAction extends AnAction {
             VirtualFile virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
             if (virtualFile != null && isYamlOrPropertiesFile(virtualFile)) {
                 try {
-                    processFile(virtualFile);
+                    if("Off".equals(EncSettingState.getInstance().isHtmlView)){
+                        processFileV2(project, virtualFile);
+                    }else{
+                        processFile(virtualFile);
+                    }
                 } catch (Exception ex) {
                     Messages.showMessageDialog(ex.getMessage(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
                 }
@@ -37,6 +44,42 @@ public class DecryptEncAction extends AnAction {
     private boolean isYamlOrPropertiesFile(VirtualFile virtualFile) {
         String fileName = virtualFile.getName();
         return fileName.endsWith(".yml") || fileName.endsWith(".properties");
+    }
+
+    private void processFileV2(Project project, VirtualFile virtualFile) throws IOException {
+        String text = new String(virtualFile.contentsToByteArray());
+        // 使用正则表达式匹配并解密ENC()格式的字符串
+        Pattern pattern = Pattern.compile("ENC\\(([^)]+)\\)");
+        Matcher matcher = pattern.matcher(text);
+        StringBuilder decryptedContent = new StringBuilder();
+        int lastEnd = 0;
+        StringBuilder message = new StringBuilder();
+        while (matcher.find()) {
+            int start = matcher.start();
+            int end = matcher.end();
+            String encryptedText = matcher.group(1); // 获取ENC()包裹的字符串
+            DecryptResult decryptResult = decrypt(encryptedText); // 解密
+
+            decryptedContent.append(text, lastEnd, start); // 将上次解密位置到本次解密位置之间的内容添加到解密后的文本中
+            if (!decryptResult.isDecryptError()) {
+                decryptedContent.append(decryptResult.decryptStr());
+            } else {
+                message.append(decryptResult.message()).append("\n");
+                decryptedContent.append(decryptResult.decryptStr());
+            }
+            lastEnd = end; // 更新上次解密位置
+        }
+        decryptedContent.append(text, lastEnd, text.length());
+        if(!message.isEmpty()){
+            Messages.showMessageDialog(message.toString(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+        }
+        DiffContentFactory contentFactory = DiffContentFactory.getInstance();
+        SimpleDiffRequest diffRequest = new SimpleDiffRequest("ENC Compare",
+                contentFactory.create(text),
+                contentFactory.create(decryptedContent.toString()),
+                "Source file", "Decrypted file");
+
+        DiffManager.getInstance().showDiff(project, diffRequest);
     }
 
     private void processFile(VirtualFile virtualFile) throws Exception {

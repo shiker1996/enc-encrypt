@@ -1,13 +1,17 @@
 package tech.shiker.config;
 
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.ui.JBColor;
+import com.intellij.ui.TextIcon;
 import com.intellij.ui.components.JBLabel;
+import com.intellij.ui.components.JBRadioButton;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.util.ui.FormBuilder;
 import org.jetbrains.annotations.NotNull;
 import tech.shiker.common.SecurityMethod;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class EncToolComponent {
 
@@ -19,18 +23,51 @@ public class EncToolComponent {
     private final ComboBox<String> decryptedInformationBox = new ComboBox<>();
     private String decryptedInformation = "AES/ECB/PKCS5Padding";
     private final JBTextField decryptedIv = new JBTextField();
+    private final JRadioButton isHtmlView = new JRadioButton("On"); ;
 
     public EncToolComponent() {
-        SecurityMethod.getAllDecryptType().forEach(decryptedTypeBox::addItem);
-        SecurityMethod.getAllDecryptInformation().forEach(decryptedInformationBox::addItem);decryptedTypeBox.addActionListener(e -> decryptedType = (String) decryptedTypeBox.getSelectedItem());
-        decryptedInformationBox.addActionListener(e -> decryptedInformation = (String) decryptedInformationBox.getSelectedItem());
+        JLabel decryptedIvLabel = new JBLabel("Enter decrypted iv:");
+        SecurityMethod.getType2Information().keySet().forEach(decryptedTypeBox::addItem);
+        decryptedTypeBox.addActionListener(e -> {
+            decryptedType = (String) decryptedTypeBox.getSelectedItem();
+            updateInformationComboBox(decryptedType, decryptedInformationBox);
+        });
+        decryptedInformationBox.addActionListener(e -> {
+            decryptedInformation = (String) decryptedInformationBox.getSelectedItem();
+            updateDecryptedVi(decryptedIv, decryptedIvLabel, decryptedInformation);
+        });
+        isHtmlView.addActionListener(e -> {
+            if (isHtmlView.isSelected()) {
+                isHtmlView.setText("On");
+            } else {
+                isHtmlView.setText("Off");
+            }
+        });
         myMainPanel = FormBuilder.createFormBuilder()
+                .addLabeledComponent(new JBLabel("Html compare view:"), isHtmlView, 1, false)
                 .addLabeledComponent(new JBLabel("Enter decrypted type: "), decryptedTypeBox, 1, false)
-                .addLabeledComponent(new JBLabel("Enter decrypted key:"), decryptedKeyText, 1, false)
                 .addLabeledComponent(new JBLabel("Enter decrypted information:"), decryptedInformationBox, 1, false)
-                .addLabeledComponent(new JBLabel("Enter decrypted iv:"), decryptedIv, 1,false)
+                .addLabeledComponent(new JBLabel("Enter decrypted key:"), decryptedKeyText, 1, false)
+                .addLabeledComponent(decryptedIvLabel, decryptedIv, 1, false)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
+    }
+
+    private void updateDecryptedVi(JBTextField decryptedIv, JLabel decryptedIvLabel, String decryptedInformation) {
+        // 根据解密信息的不同，更新IV的可见性
+        if (decryptedInformation != null && decryptedInformation.contains("CBC")) {
+            decryptedIv.setVisible(true);
+            decryptedIvLabel.setVisible(true);
+        }else{
+            decryptedIv.setVisible(false);
+            decryptedIvLabel.setVisible(false);
+        }
+    }
+
+    // 更新城市ComboBox的内容
+    private void updateInformationComboBox(String decryptedType, ComboBox<String> decryptedInformationBox) {
+        String[] cities = SecurityMethod.getType2Information().get(decryptedType).toArray(new String[0]);
+        decryptedInformationBox.setModel(new DefaultComboBoxModel<>(cities));
     }
 
     public JPanel getPanel() {
@@ -61,19 +98,27 @@ public class EncToolComponent {
         return decryptedIv.getText();
     }
 
-    public void setDecryptedTypeText(@NotNull String decryptedType){
+    public String getIsHtmlView() {
+        return isHtmlView.getText();
+    }
+
+    public void setDecryptedTypeText(@NotNull String decryptedType) {
         decryptedTypeBox.setSelectedItem(decryptedType);
     }
 
-    public void setDecryptedKeyText(@NotNull String decryptedKey){
+    public void setDecryptedKeyText(@NotNull String decryptedKey) {
         decryptedKeyText.setText(decryptedKey);
     }
 
-    public void setDecryptedInformation(@NotNull String decryptedInformationStr){
+    public void setDecryptedInformation(@NotNull String decryptedInformationStr) {
         decryptedInformationBox.setSelectedItem(decryptedInformationStr);
     }
 
-    public void setDecryptedIv(@NotNull String decryptedIvStr){
+    public void setDecryptedIv(@NotNull String decryptedIvStr) {
         decryptedIv.setText(decryptedIvStr);
+    }
+
+    public void setIsHtmlView(@NotNull String isHtmlViewStr){
+        isHtmlView.setText(isHtmlViewStr);
     }
 }
