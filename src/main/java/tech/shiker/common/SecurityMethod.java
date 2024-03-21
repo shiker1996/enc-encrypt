@@ -1,19 +1,19 @@
 package tech.shiker.common;
 
+import com.google.common.collect.Lists;
 import tech.shiker.security.AesCBCNoPaddingSecurityInstance;
 import tech.shiker.security.AesCBCPkcs5PaddingSecurityInstance;
-import tech.shiker.security.AesECBPkcs5PaddingSecurityInstance;
 import tech.shiker.security.AesECBNoPaddingSecurityInstance;
+import tech.shiker.security.AesECBPkcs5PaddingSecurityInstance;
 import tech.shiker.security.DesCBCNoPaddingSecurityInstance;
 import tech.shiker.security.DesCBCPkcs5PaddingSecurityInstance;
 import tech.shiker.security.DesECBNoPaddingSecurityInstance;
 import tech.shiker.security.DesECBPkcs5PaddingSecurityInstance;
 import tech.shiker.security.SecurityInstance;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public enum SecurityMethod {
 
@@ -60,11 +60,15 @@ public enum SecurityMethod {
         return null;
     }
 
-    public static Set<String> getAllDecryptType(){
-        return Arrays.stream(SecurityMethod.values()).map(SecurityMethod::decryptType).collect(Collectors.toSet());
-    }
-
-    public static List<String> getAllDecryptInformation(){
-        return Arrays.stream(SecurityMethod.values()).map(SecurityMethod::decryptInformation).collect(Collectors.toList());
+    public static Map<String, List<String>> getType2Information(){
+        Map<String, List<String>> result = new HashMap<>();
+        for (SecurityMethod value : SecurityMethod.values()) {
+            if(result.containsKey(value.decryptType())){
+                result.get(value.decryptType()).add(value.decryptInformation());
+            }else{
+                result.put(value.decryptType(), Lists.newArrayList(value.decryptInformation()));
+            }
+        }
+        return result;
     }
 }

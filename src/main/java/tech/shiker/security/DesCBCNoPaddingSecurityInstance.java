@@ -16,7 +16,6 @@ public class DesCBCNoPaddingSecurityInstance implements SecurityInstance{
     public EncryptResult encrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 24) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         // 判断Key是否正确
@@ -25,7 +24,6 @@ public class DesCBCNoPaddingSecurityInstance implements SecurityInstance{
         }
         // 判断Key是否为24位
         if (index.length() != 8) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.DES_CBC_NO_PADDING.decryptInformation());
@@ -40,7 +38,6 @@ public class DesCBCNoPaddingSecurityInstance implements SecurityInstance{
     public DecryptResult decrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 24) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         if (index == null) {
@@ -48,7 +45,6 @@ public class DesCBCNoPaddingSecurityInstance implements SecurityInstance{
         }
         // 判断Key是否为16位
         if (index.length() != 8) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.DES_CBC_NO_PADDING.decryptInformation());

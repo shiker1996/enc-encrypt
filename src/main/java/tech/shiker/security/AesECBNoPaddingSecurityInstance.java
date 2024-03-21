@@ -16,7 +16,6 @@ public class AesECBNoPaddingSecurityInstance implements SecurityInstance{
     public EncryptResult encrypt(String src, String key) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 16) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.AES_ECB_NO_PADDING.decryptInformation());
@@ -35,7 +34,6 @@ public class AesECBNoPaddingSecurityInstance implements SecurityInstance{
     public DecryptResult decrypt(String src, String key) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 16) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.AES_ECB_NO_PADDING.decryptInformation());

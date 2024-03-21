@@ -24,6 +24,9 @@
 <li><p>Feature 2 - encrypt</p>
 <p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/encrypt.gif" referrerpolicy="no-referrer" alt="demo2"></p>
 </li>
+<li><p>Feature 3 - more style comparison</p>
+<p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/style.png" referrerpolicy="no-referrer" alt="style"></p>
+</li>
 <li><p>Supported algorithm:</p>
 <ul>
 <li>AES/ECB/PKCS5Padding</li>

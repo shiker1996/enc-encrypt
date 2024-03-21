@@ -10,7 +10,10 @@ The ENC decryption tool, which can decrypt configuration files using <a href="ht
 2. Feature 2 - encrypt
 
    ![demo2](img/encrypt.gif)
-3. Supported algorithm:
+3. Feature 3 - more style comparison!
+
+   ![style.png](img/style.png)
+4. Supported algorithm:
    - AES/ECB/PKCS5Padding
    - AES/ECB/NoPadding
    - AES/CBC/PKCS5Padding

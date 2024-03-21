@@ -16,7 +16,6 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
     @Override
     public EncryptResult encrypt(String src, String key, String index) throws Exception {
         if (key.length() != 16) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         // 判断Key是否正确
@@ -25,7 +24,6 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
         }
         // 判断Key是否为16位
         if (index.length() != 16) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.AES_CBC_PKCS5_PADDING.decryptInformation());
@@ -40,7 +38,6 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
     public DecryptResult decrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 16) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_INVALID_MESSAGE);
         }
         // 判断Key是否正确
@@ -49,7 +46,6 @@ public class AesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
         }
         // 判断Key是否为16位
         if (index.length() != 16) {
-            Messages.showInfoMessage(SecurityConstant.KEY_INVALID_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
             return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_INVALID_MESSAGE);
         }
         Cipher cipher = Cipher.getInstance(SecurityMethod.AES_CBC_PKCS5_PADDING.decryptInformation());

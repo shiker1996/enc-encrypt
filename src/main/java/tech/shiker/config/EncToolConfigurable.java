@@ -38,6 +38,7 @@ public class EncToolConfigurable implements Configurable {
         modified |= !mySettingsComponent.getDecryptedKey().equals(settings.decryptedKey);
         modified |= !mySettingsComponent.getDecryptedInformation().equals(settings.decryptedInformation);
         modified |= !mySettingsComponent.getDecryptedIv().equals(settings.decryptedVi);
+        modified |= !mySettingsComponent.getIsHtmlView().equals(settings.isHtmlView);
         return modified;
     }
 
@@ -48,6 +49,7 @@ public class EncToolConfigurable implements Configurable {
         settings.decryptedKey = mySettingsComponent.getDecryptedKey();
         settings.decryptedInformation = mySettingsComponent.getDecryptedInformation();
         settings.decryptedVi = mySettingsComponent.getDecryptedIv();
+        settings.isHtmlView = mySettingsComponent.getIsHtmlView();
     }
 
     @Override
@@ -57,6 +59,7 @@ public class EncToolConfigurable implements Configurable {
         mySettingsComponent.setDecryptedTypeText(settings.decryptedType);
         mySettingsComponent.setDecryptedInformation(settings.decryptedInformation);
         mySettingsComponent.setDecryptedIv(settings.decryptedVi);
+        mySettingsComponent.setIsHtmlView(settings.isHtmlView);
     }
 
     @Override
