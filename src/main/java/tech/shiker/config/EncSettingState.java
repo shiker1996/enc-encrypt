@@ -18,7 +18,7 @@ public final class EncSettingState implements PersistentStateComponent<EncSettin
     public String decryptedKey = "hi World Decrypt";
     public String decryptedInformation = "AES/ECB/PKCS5Padding";
     public String decryptedVi = null;
-    public String isHtmlView = "On";
+    public Boolean isHtmlView = true;
 
     public static EncSettingState getInstance() {
         return ApplicationManager.getApplication().getService(EncSettingState.class);

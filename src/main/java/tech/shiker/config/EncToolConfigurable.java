@@ -38,7 +38,7 @@ public class EncToolConfigurable implements Configurable {
         modified |= !mySettingsComponent.getDecryptedKey().equals(settings.decryptedKey);
         modified |= !mySettingsComponent.getDecryptedInformation().equals(settings.decryptedInformation);
         modified |= !mySettingsComponent.getDecryptedIv().equals(settings.decryptedVi);
-        modified |= !mySettingsComponent.getIsHtmlView().equals(settings.isHtmlView);
+        modified |= mySettingsComponent.getIsHtmlView() != settings.isHtmlView;
         return modified;
     }
 

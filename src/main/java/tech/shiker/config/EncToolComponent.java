@@ -1,17 +1,15 @@
 package tech.shiker.config;
 
 import com.intellij.openapi.ui.ComboBox;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.TextIcon;
+import com.intellij.openapi.ui.JBCheckboxMenuItem;
+import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBRadioButton;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.util.ui.FormBuilder;
 import org.jetbrains.annotations.NotNull;
 import tech.shiker.common.SecurityMethod;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class EncToolComponent {
 
@@ -23,7 +21,7 @@ public class EncToolComponent {
     private final ComboBox<String> decryptedInformationBox = new ComboBox<>();
     private String decryptedInformation = "AES/ECB/PKCS5Padding";
     private final JBTextField decryptedIv = new JBTextField();
-    private final JRadioButton isHtmlView = new JRadioButton("On"); ;
+    private final JBCheckBox isHtmlView = new JBCheckBox ("Use html viewer", true); ;
 
     public EncToolComponent() {
         JLabel decryptedIvLabel = new JBLabel("Enter decrypted iv:");
@@ -35,13 +33,6 @@ public class EncToolComponent {
         decryptedInformationBox.addActionListener(e -> {
             decryptedInformation = (String) decryptedInformationBox.getSelectedItem();
             updateDecryptedVi(decryptedIv, decryptedIvLabel, decryptedInformation);
-        });
-        isHtmlView.addActionListener(e -> {
-            if (isHtmlView.isSelected()) {
-                isHtmlView.setText("On");
-            } else {
-                isHtmlView.setText("Off");
-            }
         });
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Html compare view:"), isHtmlView, 1, false)
@@ -98,8 +89,8 @@ public class EncToolComponent {
         return decryptedIv.getText();
     }
 
-    public String getIsHtmlView() {
-        return isHtmlView.getText();
+    public boolean getIsHtmlView() {
+        return isHtmlView.isSelected();
     }
 
     public void setDecryptedTypeText(@NotNull String decryptedType) {
@@ -118,7 +109,7 @@ public class EncToolComponent {
         decryptedIv.setText(decryptedIvStr);
     }
 
-    public void setIsHtmlView(@NotNull String isHtmlViewStr){
-        isHtmlView.setText(isHtmlViewStr);
+    public void setIsHtmlView(boolean isHtmlViewStr){
+        isHtmlView.setSelected(isHtmlViewStr);
     }
 }
