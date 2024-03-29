@@ -27,9 +27,9 @@ public class DecryptEncAction extends AnAction {
             VirtualFile virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
             if (virtualFile != null && isYamlOrPropertiesFile(virtualFile)) {
                 try {
-                    if(EncSettingState.getInstance().isHtmlView){
+                    if ("On".equals(EncSettingState.getInstance().isHtmlView)) {
                         compareByHtml(virtualFile);
-                    }else{
+                    } else {
                         compareByIDEA(project, virtualFile);
                     }
                 } catch (Exception ex) {
@@ -140,7 +140,7 @@ public class DecryptEncAction extends AnAction {
             if (securityMethod == null){
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
             }
-            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi);
+            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi, EncSettingState.getInstance().decryptedSalt, EncSettingState.getInstance().decryptedIteration);
         } catch (Exception ex) {
             return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }

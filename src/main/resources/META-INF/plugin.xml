@@ -34,6 +34,10 @@
 <li>DESede/ECB/NoPadding</li>
 <li>DESede/CBC/PKCS5Padding</li>
 <li>DESede/CBC/NoPadding</li>
+<li>PBEWithMD5AndDES</li>
+<li>PBEWithSHA1AndDESede</li>
+<li>PBEWithHmacSHA256AndAES_128</li>
+<li>PBEWithHmacSHA512AndAES_256</li>
 </ul>
 </li>
 
@@ -57,6 +61,7 @@
         <action id="enc-decrypt" class="tech.shiker.enccore.DecryptEncAction" text="ENC Decrypt"
                 description="Decrypt a file">
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
         </action>
         <action id="encrypt-action" class="tech.shiker.enccore.EncryptEncAction" text="ENC Encrypt"
                 description="Encrypt a string">

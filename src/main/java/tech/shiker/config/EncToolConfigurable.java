@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class EncToolConfigurable implements Configurable {
 
@@ -34,11 +35,13 @@ public class EncToolConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         EncSettingState settings = EncSettingState.getInstance();
-        boolean modified = !mySettingsComponent.getDecryptedType().equals(settings.decryptedKey);
-        modified |= !mySettingsComponent.getDecryptedKey().equals(settings.decryptedKey);
-        modified |= !mySettingsComponent.getDecryptedInformation().equals(settings.decryptedInformation);
-        modified |= !mySettingsComponent.getDecryptedIv().equals(settings.decryptedVi);
-        modified |= mySettingsComponent.getIsHtmlView() != settings.isHtmlView;
+        boolean modified = !Objects.equals(mySettingsComponent.getDecryptedType(), settings.decryptedKey);
+        modified |= !Objects.equals(mySettingsComponent.getDecryptedKey(), settings.decryptedKey);
+        modified |= !Objects.equals(mySettingsComponent.getDecryptedInformation(), settings.decryptedInformation);
+        modified |= !Objects.equals(mySettingsComponent.getDecryptedIv(), settings.decryptedVi);
+        modified |= !Objects.equals(mySettingsComponent.getIsHtmlView(), settings.isHtmlView);
+        modified |= !Objects.equals(mySettingsComponent.getDecryptedIteration(), settings.decryptedIteration);
+        modified |= !Objects.equals(mySettingsComponent.getDecryptedSalt(), settings.decryptedSalt);
         return modified;
     }
 
@@ -50,6 +53,8 @@ public class EncToolConfigurable implements Configurable {
         settings.decryptedInformation = mySettingsComponent.getDecryptedInformation();
         settings.decryptedVi = mySettingsComponent.getDecryptedIv();
         settings.isHtmlView = mySettingsComponent.getIsHtmlView();
+        settings.decryptedIteration = mySettingsComponent.getDecryptedIteration();
+        settings.decryptedSalt = mySettingsComponent.getDecryptedSalt();
     }
 
     @Override
@@ -60,6 +65,8 @@ public class EncToolConfigurable implements Configurable {
         mySettingsComponent.setDecryptedInformation(settings.decryptedInformation);
         mySettingsComponent.setDecryptedIv(settings.decryptedVi);
         mySettingsComponent.setIsHtmlView(settings.isHtmlView);
+        mySettingsComponent.setDecryptedIteration(settings.decryptedIteration);
+        mySettingsComponent.setDecryptedSalt(settings.decryptedSalt);
     }
 
     @Override

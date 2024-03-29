@@ -1,6 +1,5 @@
 package tech.shiker.security;
 
-import com.intellij.openapi.ui.Messages;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.common.SecurityMethod;
 import tech.shiker.enccore.DecryptResult;
@@ -26,11 +25,6 @@ public class AesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
         return new EncryptResult(Base64.getEncoder().encodeToString(encryptedBytes), false, null);
     }
 
-    @Override
-    public EncryptResult encrypt(String src, String key, String index) throws Exception {
-        return encrypt(src, key);
-    }
-
     public DecryptResult decrypt(String src, String decryptedKey) throws Exception{
         // 判断Key是否为16位
         if (decryptedKey.length() != 16) {
@@ -46,7 +40,12 @@ public class AesECBPkcs5PaddingSecurityInstance implements SecurityInstance {
     }
 
     @Override
-    public DecryptResult decrypt(String src, String key, String index) throws Exception {
+    public EncryptResult encrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
+        return encrypt(src, key);
+    }
+
+    @Override
+    public DecryptResult decrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
         return decrypt(src, key);
     }
 }

@@ -6,7 +6,6 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @State(
         name = "org.intellij.sdk.settings.AppSettingsState",
@@ -18,15 +17,16 @@ public final class EncSettingState implements PersistentStateComponent<EncSettin
     public String decryptedKey = "hi World Decrypt";
     public String decryptedInformation = "AES/ECB/PKCS5Padding";
     public String decryptedVi = null;
-    public Boolean isHtmlView = true;
+    public String isHtmlView = "Off";
+    public Integer decryptedIteration = 1000;
+    public String decryptedSalt = null;
 
     public static EncSettingState getInstance() {
         return ApplicationManager.getApplication().getService(EncSettingState.class);
     }
 
-    @Nullable
     @Override
-    public EncSettingState getState() {
+    public @NotNull EncSettingState getState() {
         return this;
     }
 

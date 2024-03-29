@@ -7,6 +7,10 @@ public class SecurityConstant {
 
     public static final String KEY_INVALID_MESSAGE = "Security key is invalid";
 
+    public static final String SALT_INVALID_MESSAGE = "Security salt must be at least 8 bytes long";
+
+    public static final String ITERATIONS_INVALID_MESSAGE = "Security iterations must be greater than 0";
+
     public static final String IV_NULL_MESSAGE = "Security iv can't be null";
 
     public static final String IV_INVALID_MESSAGE = "Security iv is invalid";
