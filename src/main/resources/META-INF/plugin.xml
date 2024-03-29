@@ -19,13 +19,10 @@
 <h1>Feature</h1>
 <ol>
 <li><p>Feature 1 - decrypt</p>
-<p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/decrypt.png" referrerpolicy="no-referrer" alt="demo"></p>
 </li>
 <li><p>Feature 2 - encrypt</p>
-<p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/encrypt.gif" referrerpolicy="no-referrer" alt="demo2"></p>
 </li>
 <li><p>Feature 3 - more style comparison</p>
-<p><img src="https://raw.githubusercontent.com/shiker1996/enc-encrypt/master/img/style.png" referrerpolicy="no-referrer" alt="style"></p>
 </li>
 <li><p>Supported algorithm:</p>
 <ul>
@@ -37,6 +34,10 @@
 <li>DESede/ECB/NoPadding</li>
 <li>DESede/CBC/PKCS5Padding</li>
 <li>DESede/CBC/NoPadding</li>
+<li>PBEWithMD5AndDES</li>
+<li>PBEWithSHA1AndDESede</li>
+<li>PBEWithHmacSHA256AndAES_128</li>
+<li>PBEWithHmacSHA512AndAES_256</li>
 </ul>
 </li>
 
@@ -60,6 +61,7 @@
         <action id="enc-decrypt" class="tech.shiker.enccore.DecryptEncAction" text="ENC Decrypt"
                 description="Decrypt a file">
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
         </action>
         <action id="encrypt-action" class="tech.shiker.enccore.EncryptEncAction" text="ENC Encrypt"
                 description="Encrypt a string">

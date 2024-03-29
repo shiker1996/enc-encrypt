@@ -27,10 +27,10 @@ public class DecryptEncAction extends AnAction {
             VirtualFile virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
             if (virtualFile != null && isYamlOrPropertiesFile(virtualFile)) {
                 try {
-                    if("Off".equals(EncSettingState.getInstance().isHtmlView)){
-                        processFileV2(project, virtualFile);
-                    }else{
-                        processFile(virtualFile);
+                    if ("On".equals(EncSettingState.getInstance().isHtmlView)) {
+                        compareByHtml(virtualFile);
+                    } else {
+                        compareByIDEA(project, virtualFile);
                     }
                 } catch (Exception ex) {
                     Messages.showMessageDialog(ex.getMessage(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
@@ -46,7 +46,7 @@ public class DecryptEncAction extends AnAction {
         return fileName.endsWith(".yml") || fileName.endsWith(".properties");
     }
 
-    private void processFileV2(Project project, VirtualFile virtualFile) throws IOException {
+    private void compareByIDEA(Project project, VirtualFile virtualFile) throws IOException {
         String text = new String(virtualFile.contentsToByteArray());
         // 使用正则表达式匹配并解密ENC()格式的字符串
         Pattern pattern = Pattern.compile("ENC\\(([^)]+)\\)");
@@ -82,7 +82,7 @@ public class DecryptEncAction extends AnAction {
         DiffManager.getInstance().showDiff(project, diffRequest);
     }
 
-    private void processFile(VirtualFile virtualFile) throws Exception {
+    private void compareByHtml(VirtualFile virtualFile) throws Exception {
         String text = new String(virtualFile.contentsToByteArray());
         // 使用正则表达式匹配并解密ENC()格式的字符串
         Pattern pattern = Pattern.compile("ENC\\(([^)]+)\\)");
@@ -140,7 +140,7 @@ public class DecryptEncAction extends AnAction {
             if (securityMethod == null){
                 return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
             }
-            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi);
+            return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi, EncSettingState.getInstance().decryptedSalt, EncSettingState.getInstance().decryptedIteration);
         } catch (Exception ex) {
             return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }

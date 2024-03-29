@@ -1,6 +1,5 @@
 package tech.shiker.security;
 
-import com.intellij.openapi.ui.Messages;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.common.SecurityMethod;
 import tech.shiker.enccore.DecryptResult;
@@ -13,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class DesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
-    @Override
+
     public EncryptResult encrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 24) {
@@ -35,7 +34,6 @@ public class DesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
         return new EncryptResult(Base64.getEncoder().encodeToString(encryptedBytes), false, null);
     }
 
-    @Override
     public DecryptResult decrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
         if (key.length() != 24) {
@@ -56,5 +54,15 @@ public class DesCBCPkcs5PaddingSecurityInstance implements SecurityInstance {
         byte[] encryptedBytes = Base64.getDecoder().decode(src);
         byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
         return new DecryptResult(new String(decryptedBytes, StandardCharsets.UTF_8), false, null);
+    }
+
+    @Override
+    public EncryptResult encrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
+        return encrypt(src, key, index);
+    }
+
+    @Override
+    public DecryptResult decrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
+        return decrypt(src, key, index);
     }
 }

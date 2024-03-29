@@ -9,6 +9,10 @@ import tech.shiker.security.DesCBCNoPaddingSecurityInstance;
 import tech.shiker.security.DesCBCPkcs5PaddingSecurityInstance;
 import tech.shiker.security.DesECBNoPaddingSecurityInstance;
 import tech.shiker.security.DesECBPkcs5PaddingSecurityInstance;
+import tech.shiker.security.PBEWithMD5AndDesSecurityInstance;
+import tech.shiker.security.PBEWithSHA1AndDesSecurityInstance;
+import tech.shiker.security.PBEWithSHA256AndAes128SecurityInstance;
+import tech.shiker.security.PBEWithSHA512AndAes256SecurityInstance;
 import tech.shiker.security.SecurityInstance;
 
 import java.util.HashMap;
@@ -25,6 +29,11 @@ public enum SecurityMethod {
     DES_ECB_NO_PADDING("DESede", "DESede/ECB/NoPadding", new DesECBNoPaddingSecurityInstance()),
     DES_CBC_PKCS5_PADDING("DESede", "DESede/CBC/PKCS5Padding", new DesCBCPkcs5PaddingSecurityInstance()),
     DES_CBC_NO_PADDING("DESede", "DESede/CBC/NoPadding", new DesCBCNoPaddingSecurityInstance()),
+    PBE_WITH_MD5_AND_DES("PBEWithMD5AndDES", "PBEWithMD5AndDES", new PBEWithMD5AndDesSecurityInstance()),
+    PBE_WITH_SHA1_AND_DES("PBEWithSHA1AndDESede", "PBEWithSHA1AndDESede", new PBEWithSHA1AndDesSecurityInstance()),
+    PBE_WITH_SHA256_AND_AES_128("PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA256AndAES_128", new PBEWithSHA256AndAes128SecurityInstance()),
+    PBE_WITH_SHA512_AND_AES_256("PBEWithHmacSHA512AndAES_256", "PBEWithHmacSHA512AndAES_256", new PBEWithSHA512AndAes256SecurityInstance()),
+
     ;
 
     private final String decryptType;

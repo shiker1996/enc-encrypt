@@ -68,7 +68,7 @@ public class EncryptEncAction extends AnAction {
             if (securityMethod == null) {
                 return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
             }
-            return securityMethod.decryptInstance().encrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi);
+            return securityMethod.decryptInstance().encrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi, EncSettingState.getInstance().decryptedSalt, EncSettingState.getInstance().decryptedIteration);
         } catch (Exception ex) {
             return new EncryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.ENCRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
         }

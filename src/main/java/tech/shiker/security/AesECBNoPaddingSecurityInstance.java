@@ -1,6 +1,5 @@
 package tech.shiker.security;
 
-import com.intellij.openapi.ui.Messages;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.common.SecurityMethod;
 import tech.shiker.enccore.DecryptResult;
@@ -26,7 +25,7 @@ public class AesECBNoPaddingSecurityInstance implements SecurityInstance{
     }
 
     @Override
-    public EncryptResult encrypt(String src, String key, String index) throws Exception {
+    public EncryptResult encrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
         return encrypt(src, key);
     }
 
@@ -45,7 +44,7 @@ public class AesECBNoPaddingSecurityInstance implements SecurityInstance{
     }
 
     @Override
-    public DecryptResult decrypt(String src, String key, String index) throws Exception {
+    public DecryptResult decrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
         return decrypt(src, key);
     }
 }

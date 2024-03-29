@@ -22,5 +22,9 @@ The ENC decryption tool, which can decrypt configuration files using <a href="ht
    - DESede/ECB/NoPadding
    - DESede/CBC/PKCS5Padding
    - DESede/CBC/NoPadding
+   - PBEWithMD5AndDES
+   - PBEWithSHA1AndDESede
+   - PBEWithHmacSHA256AndAES_128
+   - PBEWithHmacSHA512AndAES_256
 
 
