@@ -1,6 +1,7 @@
 package tech.shiker.security.impl;
 
 import org.jetbrains.annotations.NotNull;
+import tech.shiker.common.Result;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.common.SecurityInfo;
 import tech.shiker.enccore.DecryptResult;
@@ -74,8 +75,5 @@ public class PBEWithAesSecurityInstance implements SecurityInstance {
         AlgorithmParameterSpec paramSpec = new PBEParameterSpec(saltBytes, iterations, iv);
         Cipher cipher = Cipher.getInstance(securityInfo.decryptInformation());
         return new Result(secretKey, paramSpec, cipher);
-    }
-
-    private record Result(SecretKey secretKey, AlgorithmParameterSpec paramSpec, Cipher cipher) {
     }
 }

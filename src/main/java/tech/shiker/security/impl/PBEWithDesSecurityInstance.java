@@ -1,6 +1,7 @@
 package tech.shiker.security.impl;
 
 import org.jetbrains.annotations.NotNull;
+import tech.shiker.common.Result;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.common.SecurityInfo;
 import tech.shiker.enccore.DecryptResult;
@@ -64,10 +65,6 @@ public class PBEWithDesSecurityInstance implements SecurityInstance {
         Cipher cipher = Cipher.getInstance(securityInfo.decryptInformation());
         return new Result(secretKey, paramSpec, cipher);
     }
-
-    private record Result(SecretKey secretKey, AlgorithmParameterSpec paramSpec, Cipher cipher) {
-    }
-
 
     @Override
     public EncryptResult encrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
