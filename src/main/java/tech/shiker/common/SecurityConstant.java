@@ -5,7 +5,7 @@ public class SecurityConstant {
 
     public static final String KEY_NULL_MESSAGE = "Security key can't be null";
 
-    public static final String KEY_INVALID_MESSAGE = "Security key is invalid";
+    public static final String KEY_INVALID_MESSAGE = "Security key must be %s bytes long";
 
     public static final String SALT_INVALID_MESSAGE = "Security salt must be at least 8 bytes long";
 
@@ -13,7 +13,7 @@ public class SecurityConstant {
 
     public static final String IV_NULL_MESSAGE = "Security iv can't be null";
 
-    public static final String IV_INVALID_MESSAGE = "Security iv is invalid";
+    public static final String IV_INVALID_MESSAGE = "Security iv must be %s bytes long";
 
     public static final String DECRYPT_ERR_MESSAGE = "Decrypt error：%s, err:%s";
 

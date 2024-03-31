@@ -26,7 +26,7 @@ public class EncToolComponent {
         JLabel decryptedIvLabel = new JBLabel("Enter decrypted iv:");
         JLabel decryptedSaltLabel = new JBLabel("Enter decrypted salt:");
         JLabel decryptedStepLabel = new JBLabel("Enter decrypted iteration count:");
-        SecurityMethod.getType2Information().keySet().forEach(decryptedTypeBox::addItem);
+        SecurityMethod.getType2Information().keySet().stream().sorted().forEach(decryptedTypeBox::addItem);
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Html compare view:"), isHtmlView, 1, false)
                 .addLabeledComponent(new JBLabel("Enter decrypted type: "), decryptedTypeBox, 1, false)
@@ -92,7 +92,7 @@ public class EncToolComponent {
 
     // 更新城市ComboBox的内容
     private void updateInformationComboBox(String decryptedType, ComboBox<String> decryptedInformationBox) {
-        String[] decryptedInformationArr = SecurityMethod.getType2Information().get(decryptedType).toArray(new String[0]);
+        String[] decryptedInformationArr = SecurityMethod.getType2Information().get(decryptedType).stream().sorted().toArray(String[]::new);
         decryptedInformationBox.setModel(new DefaultComboBoxModel<>(decryptedInformationArr));
         decryptedInformationBox.setSelectedItem(decryptedInformationArr[0]);
     }
