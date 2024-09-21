@@ -17,7 +17,7 @@ public class EncToolConfigurable implements Configurable {
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
     public String getDisplayName() {
-        return "ENC Decrypt";
+        return "ENC Encrypt";
     }
 
     @Override
@@ -42,6 +42,7 @@ public class EncToolConfigurable implements Configurable {
         modified |= !Objects.equals(mySettingsComponent.getIsHtmlView(), settings.isHtmlView);
         modified |= !Objects.equals(mySettingsComponent.getDecryptedIteration(), settings.decryptedIteration);
         modified |= !Objects.equals(mySettingsComponent.getDecryptedSalt(), settings.decryptedSalt);
+        modified |= !Objects.equals(mySettingsComponent.getDecryptedProperties(), settings.decryptedProperties);
         return modified;
     }
 
@@ -55,6 +56,7 @@ public class EncToolConfigurable implements Configurable {
         settings.isHtmlView = mySettingsComponent.getIsHtmlView();
         settings.decryptedIteration = mySettingsComponent.getDecryptedIteration();
         settings.decryptedSalt = mySettingsComponent.getDecryptedSalt();
+        settings.decryptedProperties = mySettingsComponent.getDecryptedProperties();
     }
 
     @Override
@@ -67,6 +69,7 @@ public class EncToolConfigurable implements Configurable {
         mySettingsComponent.setIsHtmlView(settings.isHtmlView);
         mySettingsComponent.setDecryptedIteration(settings.decryptedIteration);
         mySettingsComponent.setDecryptedSalt(settings.decryptedSalt);
+        mySettingsComponent.setDecryptedProperties(settings.decryptedProperties);
     }
 
     @Override

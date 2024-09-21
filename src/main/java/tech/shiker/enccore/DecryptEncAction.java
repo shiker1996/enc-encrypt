@@ -15,10 +15,13 @@ import tech.shiker.config.EncSettingState;
 import tech.shiker.page.ComparisonFrame;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DecryptEncAction extends AnAction {
+
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -33,17 +36,17 @@ public class DecryptEncAction extends AnAction {
                         compareByIDEA(project, virtualFile);
                     }
                 } catch (Exception ex) {
-                    Messages.showMessageDialog(ex.getMessage(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+                    Messages.showMessageDialog(ex.getMessage(), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
                 }
             } else {
-                Messages.showMessageDialog(SecurityConstant.UN_SUPPORT_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+                Messages.showMessageDialog(SecurityConstant.UN_SUPPORT_MESSAGE, bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
             }
         }
     }
 
     private boolean isYamlOrPropertiesFile(VirtualFile virtualFile) {
         String fileName = virtualFile.getName();
-        return fileName.endsWith(".yml") || fileName.endsWith(".properties");
+        return fileName.endsWith(".yml") || fileName.endsWith(".yaml") || fileName.endsWith(".properties");
     }
 
     private void compareByIDEA(Project project, VirtualFile virtualFile) throws IOException {
@@ -70,14 +73,14 @@ public class DecryptEncAction extends AnAction {
             lastEnd = end; // 更新上次解密位置
         }
         decryptedContent.append(text, lastEnd, text.length());
-        if(!message.isEmpty()){
-            Messages.showMessageDialog(message.toString(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+        if (!message.isEmpty()) {
+            Messages.showMessageDialog(message.toString(), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
         }
         DiffContentFactory contentFactory = DiffContentFactory.getInstance();
-        SimpleDiffRequest diffRequest = new SimpleDiffRequest("ENC Compare",
+        SimpleDiffRequest diffRequest = new SimpleDiffRequest(bundle.getString(SecurityConstant.DECRYPTED_COMPARE_TITLE),
                 contentFactory.create(text),
                 contentFactory.create(decryptedContent.toString()),
-                "Source file", "Decrypted file");
+                bundle.getString(SecurityConstant.ORIGINAL_FILE_TITLE), bundle.getString(SecurityConstant.DECRYPT_FILE_TITLE));
 
         DiffManager.getInstance().showDiff(project, diffRequest);
     }
@@ -108,8 +111,8 @@ public class DecryptEncAction extends AnAction {
             originalContent.append("<font color='blue'>ENC(").append(encryptedText).append(")</font>");
             lastEnd = end; // 更新上次解密位置
         }
-        if(!message.isEmpty()){
-            Messages.showMessageDialog(message.toString(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+        if (!message.isEmpty()) {
+            Messages.showMessageDialog(message.toString(), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
         }
         decryptedContent.append(text, lastEnd, text.length());
         originalContent.append(text, lastEnd, text.length());
@@ -128,21 +131,21 @@ public class DecryptEncAction extends AnAction {
         try {
             // 判断Key是否正确
             if (EncSettingState.getInstance().decryptedKey == null) {
-                return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.KEY_NULL_MESSAGE);
+                return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.KEY_NULL_MESSAGE));
             }
             if (EncSettingState.getInstance().decryptedType == null) {
-                return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.TYPE_NULL_MESSAGE);
+                return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.TYPE_NULL_MESSAGE));
             }
             if (EncSettingState.getInstance().decryptedInformation == null) {
-                return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.INFORMATION_NULL_MESSAGE);
+                return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.INFORMATION_NULL_MESSAGE));
             }
             SecurityMethod securityMethod = SecurityMethod.decryptMethod(EncSettingState.getInstance().decryptedType, EncSettingState.getInstance().decryptedInformation);
-            if (securityMethod == null){
-                return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.DECRYPT_UNKNOWN_MESSAGE);
+            if (securityMethod == null) {
+                return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.DECRYPT_UNKNOWN_MESSAGE));
             }
             return securityMethod.decryptInstance().decrypt(sSrc, EncSettingState.getInstance().decryptedKey, EncSettingState.getInstance().decryptedVi, EncSettingState.getInstance().decryptedSalt, EncSettingState.getInstance().decryptedIteration);
         } catch (Exception ex) {
-            return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.DECRYPT_ERR_MESSAGE, sSrc, ex.getMessage()));
+            return new DecryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.DECRYPT_ERR_MESSAGE), sSrc, ex.getMessage()));
         }
     }
 }

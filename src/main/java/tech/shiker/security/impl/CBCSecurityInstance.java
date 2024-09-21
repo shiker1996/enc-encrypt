@@ -12,10 +12,13 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.ResourceBundle;
 
 public class CBCSecurityInstance implements SecurityInstance {
 
     private final SecurityInfo securityInfo;
+
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     public CBCSecurityInstance(SecurityInfo securityInfo) {
         this.securityInfo = securityInfo;
@@ -23,15 +26,15 @@ public class CBCSecurityInstance implements SecurityInstance {
 
     public EncryptResult encrypt(String src, String key, String index) throws Exception {
         if (key.length() != securityInfo.keyLength()) {
-            return new EncryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.KEY_INVALID_MESSAGE, securityInfo.keyLength()));
+            return new EncryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.KEY_INVALID_MESSAGE), securityInfo.keyLength()));
         }
         // 判断Key是否正确
         if (index == null) {
-            return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_NULL_MESSAGE);
+            return new EncryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.IV_NULL_MESSAGE));
         }
         // 判断Key是否为16位
         if (index.length() != securityInfo.indexLength()) {
-            return new EncryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.IV_INVALID_MESSAGE, securityInfo.indexLength()));
+            return new EncryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.IV_INVALID_MESSAGE), securityInfo.indexLength()));
         }
         Cipher cipher = Cipher.getInstance(securityInfo.decryptInformation());
         SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), securityInfo.decryptType());
@@ -44,15 +47,15 @@ public class CBCSecurityInstance implements SecurityInstance {
     public DecryptResult decrypt(String src, String key, String index) throws Exception {
         // 判断Key是否为16位
         if (key.length() != securityInfo.keyLength()) {
-            return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.KEY_INVALID_MESSAGE, securityInfo.keyLength()));
+            return new DecryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.KEY_INVALID_MESSAGE), securityInfo.keyLength()));
         }
         // 判断Key是否正确
         if (index == null) {
-            return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.IV_NULL_MESSAGE);
+            return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.IV_NULL_MESSAGE));
         }
         // 判断Key是否为16位
         if (index.length() != securityInfo.indexLength()) {
-            return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.IV_INVALID_MESSAGE, securityInfo.indexLength()));
+            return new DecryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.IV_INVALID_MESSAGE), securityInfo.indexLength()));
         }
         Cipher cipher = Cipher.getInstance(securityInfo.decryptInformation());
         SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), securityInfo.decryptType());

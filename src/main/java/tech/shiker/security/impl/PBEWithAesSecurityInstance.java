@@ -20,10 +20,13 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
+import java.util.ResourceBundle;
 
 public class PBEWithAesSecurityInstance implements SecurityInstance {
 
     private final SecurityInfo securityInfo;
+
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     public PBEWithAesSecurityInstance(SecurityInfo securityInfo) {
         this.securityInfo = securityInfo;
@@ -31,14 +34,14 @@ public class PBEWithAesSecurityInstance implements SecurityInstance {
     @Override
     public EncryptResult encrypt(String src, String key, String index, String salt, Integer iterations ) throws Exception {
         if (salt.length() < securityInfo.saltLength()) {
-            return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.SALT_INVALID_MESSAGE);
+            return new EncryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.SALT_INVALID_MESSAGE));
         }
         if (iterations == securityInfo.iterations()) {
-            return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.ITERATIONS_INVALID_MESSAGE);
+            return new EncryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.ITERATIONS_INVALID_MESSAGE));
         }
         // 判断Key是否为16位
         if (index.length() != securityInfo.indexLength()) {
-            return new EncryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.IV_INVALID_MESSAGE, securityInfo.indexLength()));
+            return new EncryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.IV_INVALID_MESSAGE), securityInfo.indexLength()));
         }
         Result result = getSecurityCipherInfo(key, index, salt, iterations);
         result.cipher().init(Cipher.ENCRYPT_MODE, result.secretKey(), result.paramSpec());
@@ -49,14 +52,14 @@ public class PBEWithAesSecurityInstance implements SecurityInstance {
     @Override
     public DecryptResult decrypt(String src, String key, String index, String salt, Integer iterations) throws Exception {
         if (salt.length() < securityInfo.saltLength()) {
-            return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.SALT_INVALID_MESSAGE);
+            return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.SALT_INVALID_MESSAGE));
         }
         if (iterations == securityInfo.iterations()) {
-            return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.ITERATIONS_INVALID_MESSAGE);
+            return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.ITERATIONS_INVALID_MESSAGE));
         }
         // 判断Key是否为16位
         if (index.length() != securityInfo.indexLength()) {
-            return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.IV_INVALID_MESSAGE, securityInfo.indexLength()));
+            return new DecryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.IV_INVALID_MESSAGE), securityInfo.indexLength()));
         }
         Result result = getSecurityCipherInfo(key, index, salt, iterations);
         result.cipher().init(Cipher.DECRYPT_MODE, result.secretKey(), result.paramSpec());

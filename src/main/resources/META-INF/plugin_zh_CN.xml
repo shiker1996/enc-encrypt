@@ -5,7 +5,7 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>ENC Decrypt Tool</name>
+    <name>ENC加解密工具</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="1159181016@qq.com" url="https://shiker.tech">橙序员</vendor>
@@ -15,49 +15,35 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description>
         <![CDATA[
-<h1>Description</h1>
-<p>The ENC decryption tool, which can decrypt configuration files using <a href="https://github.com/ulisesbocchio/jasypt-spring-boot" >jasypt-spring-boot</a>, can be used for file verification when you use <a href="https://github.com/ulisesbocchio/jasypt-spring-boot">jasypt-spring-boot</a>  in your project</p>
-<h1>Feature</h1>
-<ol>
-<li><h2>Feature 1 - decrypt</h2>
-<p>Supports comparison of selected files before and after encryption and decryption</p>
-</li>
-<li><h2>Feature 2 - encrypt</h2>
-<p>1. Support encryption of selected text</p>
-<p>2. Supports encryption of matching attributes in the entire configuration file through regular expressions</p>
-</li>
-<li><p>Feature 3 - more style comparison</p>
-</li>
-<li><p>Supported algorithm:</p>
-<ul>
-<li>AES/ECB/PKCS5Padding</li>
-<li>AES/ECB/NoPadding</li>
-<li>AES/CBC/PKCS5Padding</li>
-<li>AES/CBC/NoPadding</li>
-<li>DESede/ECB/PKCS5Padding</li>
-<li>DESede/ECB/NoPadding</li>
-<li>DESede/CBC/PKCS5Padding</li>
-<li>DESede/CBC/NoPadding</li>
-<li>PBEWithMD5AndDES</li>
-<li>PBEWithSHA1AndDESede</li>
-<li>PBEWithHmacSHA256AndAES_128</li>
-<li>PBEWithHmacSHA512AndAES_256</li>
-</ul>
-</li>
 
+<h1>描述</h1>
+<p>ENC解密工具，可以使用<a href="https://github.com/ulisesbocchio/jasypt-spring-boot" >jasypt-spring-boot</a>解密配置文件，可以在项目中使用<a href="https://github.com/ulisesbocchio/jasypt-spring-boot">jasypt-spring-boot</a>时用于文件验证</p>
+<h1>功能</h1>
+<ol>
+<li><h2>功能1-解密</h2>
+<p>支持对加密解密前后选定文件进行对比</p>
+</li>
+<li><h2>功能2-加密</h2>
+<p>1.支持对选定文本进行加密</p>
+<p>2.支持通过正则表达式对整个配置文件中匹配的属性进行加密</p>
+</li>
+<li><p>功能3-更多样式对比</p>
+</li>
+<li><p>支持的加密算法：</p> <ul> <li>AES/ECB/PKCS5Padding</li> <li>AES/ECB/NoPadding</li> <li>AES/CBC/PKCS5Padding</li> <li>AES/CBC/NoPadding</li> <li>DESede/ECB/PKCS5Padding</li> <li>DESede/ECB/NoPadding</li> <li>DESede/CBC/PKCS5Padding</li><li>DESede /CBC/NoPadding</li> <li>PBEWithMD5AndDES</li> <li>PBEWithSHA1AndDESede</li> <li>PBEWithHmacSHA256AndAES_128</li> <li>PBEWithHmacSHA512AndAES_256</li> </ul> </li>
 </ol>
 
 ]]>
     </description>
     <change-notes>
         <![CDATA[
-        <h2>New Features</h2>
+<h2>新功能</h2>
 <ul>
-  <li>Supports encryption of matching attributes in the entire configuration file through regular expressions</li>
+<li>支持通过正则表达式对整个配置文件中的匹配属性进行加密</li>
+<li>支持多语言</li>
 </ul>
-<h2>Bug Fixes</h2>
+<h2>错误修复</h2>
 <ul>
-  <li>Fixed a bug where plugin options could not be reset/li>
+<li>修复了插件选项无法重置的错误/li>
 </ul>
 ]]>
     </change-notes>
