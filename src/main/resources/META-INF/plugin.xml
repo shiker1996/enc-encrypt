@@ -89,5 +89,5 @@
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
         </action>
     </actions>
-    <resource-bundle>META-INF.messages</resource-bundle>
+    <resource-bundle>META-INF.EncToolBundle</resource-bundle>
 </idea-plugin>

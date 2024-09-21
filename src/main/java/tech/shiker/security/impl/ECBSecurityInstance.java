@@ -11,9 +11,12 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.ResourceBundle;
 
 public class ECBSecurityInstance implements SecurityInstance {
     private final SecurityInfo securityInfo;
+
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     public ECBSecurityInstance(SecurityInfo securityInfo) {
         this.securityInfo = securityInfo;
@@ -22,7 +25,7 @@ public class ECBSecurityInstance implements SecurityInstance {
     public EncryptResult encrypt(String src, String key) throws Exception {
         // 判断Key是否为16位
         if (key.length() != securityInfo.keyLength()) {
-            return new EncryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.KEY_INVALID_MESSAGE, securityInfo.keyLength()));
+            return new EncryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.KEY_INVALID_MESSAGE), securityInfo.keyLength()));
         }
         Cipher cipher = Cipher.getInstance(securityInfo.decryptInformation());
         SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), securityInfo.decryptType());
@@ -34,7 +37,7 @@ public class ECBSecurityInstance implements SecurityInstance {
     public DecryptResult decrypt(String src, String key) throws Exception {
         // 判断Key是否为16位
         if (key.length() != securityInfo.keyLength()) {
-            return new DecryptResult("!!!!ERROR!!!", true, String.format(SecurityConstant.KEY_INVALID_MESSAGE, securityInfo.keyLength()));
+            return new DecryptResult("!!!!ERROR!!!", true, String.format(bundle.getString(SecurityConstant.KEY_INVALID_MESSAGE), securityInfo.keyLength()));
         }
         Cipher cipher = Cipher.getInstance(securityInfo.decryptInformation());
         SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), securityInfo.decryptType());

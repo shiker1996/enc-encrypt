@@ -19,19 +19,22 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
+import java.util.ResourceBundle;
 
 public class PBEWithDesSecurityInstance implements SecurityInstance {
     private final SecurityInfo securityInfo;
+
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     public PBEWithDesSecurityInstance(SecurityInfo securityInfo) {
         this.securityInfo = securityInfo;
     }
     public EncryptResult encrypt(String src, String key, String salt, Integer iterations) throws Exception {     // 判断Key是否为16位
         if (salt.length() < securityInfo.saltLength()) {
-            return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.SALT_INVALID_MESSAGE);
+            return new EncryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.SALT_INVALID_MESSAGE));
         }
         if (iterations == securityInfo.iterations()) {
-            return new EncryptResult("!!!!ERROR!!!", true, SecurityConstant.ITERATIONS_INVALID_MESSAGE);
+            return new EncryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.ITERATIONS_INVALID_MESSAGE));
         }
 
         Result result = getSecurityCipherInfo(key, salt, iterations);
@@ -43,10 +46,10 @@ public class PBEWithDesSecurityInstance implements SecurityInstance {
 
     public DecryptResult decrypt(String src, String key, String salt, Integer iterations) throws Exception {
         if (salt.length() < securityInfo.saltLength()) {
-            return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.SALT_INVALID_MESSAGE);
+            return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.SALT_INVALID_MESSAGE));
         }
         if (iterations == securityInfo.iterations()) {
-            return new DecryptResult("!!!!ERROR!!!", true, SecurityConstant.ITERATIONS_INVALID_MESSAGE);
+            return new DecryptResult("!!!!ERROR!!!", true, bundle.getString(SecurityConstant.ITERATIONS_INVALID_MESSAGE));
         }
         Result result = getSecurityCipherInfo(key, salt, iterations);
         result.cipher().init(Cipher.DECRYPT_MODE, result.secretKey(), result.paramSpec());
