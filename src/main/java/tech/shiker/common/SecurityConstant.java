@@ -57,4 +57,8 @@ public class SecurityConstant {
     public static final String DECRYPTED_MATCH_KEY_LABEL = "tool.decrypted-match-key-label";
 
     public static final String DECRYPTED_COMPARE_TITLE = "tool.message.compare_title";
+
+    public static final String ENCRYPT_COMPLETE = "tool.message.encrypt_complete";
+
+    public static final String ENCRYPT_NOT_MATCH = "tool.message.encrypt_not_match";
 }

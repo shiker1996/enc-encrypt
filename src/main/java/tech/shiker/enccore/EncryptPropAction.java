@@ -12,11 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import tech.shiker.common.SecurityConstant;
 import tech.shiker.config.EncSettingState;
 
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EncryptPropAction extends AnAction {
 
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
@@ -42,20 +44,28 @@ public class EncryptPropAction extends AnAction {
         String fileText = document.getText();
         Matcher matcher = pattern.matcher(fileText);
         StringBuffer resultString = new StringBuffer();
+        boolean isMatched = false;
         while (matcher.find()) {
+            isMatched = true;
             String key = matcher.group(1);
             String value = matcher.group(2);
             EncryptResult encryptResult = EncryptSupport.encrypt(value);
             if (encryptResult.isEncryptError()) {
-                Messages.showMessageDialog(project, encryptResult.message(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+                Messages.showMessageDialog(project, encryptResult.message(), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
                 return;
             }
             matcher.appendReplacement(resultString, key + String.format(SecurityConstant.ENCRYPT_RESULT, encryptResult.encryptStr()));
         }
-        matcher.appendTail(resultString);
-        WriteCommandAction.runWriteCommandAction(project, () -> {
-            document.setText(resultString.toString());
-        });
+        if (isMatched) {
+            matcher.appendTail(resultString);
+            WriteCommandAction.runWriteCommandAction(project, () -> {
+                document.setText(resultString.toString());
+            });
+            Messages.showMessageDialog(project, bundle.getString(SecurityConstant.ENCRYPT_COMPLETE), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
+        } else {
+            Messages.showMessageDialog(project, bundle.getString(SecurityConstant.ENCRYPT_NOT_MATCH), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+        }
+
     }
 
 

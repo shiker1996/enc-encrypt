@@ -13,7 +13,12 @@ import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 import tech.shiker.common.SecurityConstant;
 
+import java.util.ResourceBundle;
+
 public class EncryptEncAction extends AnAction {
+
+
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {
@@ -34,7 +39,7 @@ public class EncryptEncAction extends AnAction {
                     // 进行加密操作
                     EncryptResult encryptResult = EncryptSupport.encrypt(selectedText);
                     if (encryptResult.isEncryptError()) {
-                        Messages.showMessageDialog(project, encryptResult.message(), SecurityConstant.ENC_DECRYPT_TITLE, Messages.getInformationIcon());
+                        Messages.showMessageDialog(project, encryptResult.message(), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE), Messages.getInformationIcon());
                     }
                     // 获取选中文本的开始和结束偏移量
                     int startOffset = selectionModel.getSelectionStart();
@@ -44,7 +49,7 @@ public class EncryptEncAction extends AnAction {
                     WriteCommandAction.runWriteCommandAction(project, () ->
                             document.replaceString(startOffset, endOffset, String.format(SecurityConstant.ENCRYPT_RESULT, encryptResult.encryptStr())));
                 } else {
-                    Messages.showInfoMessage(project, SecurityConstant.ENCRYPT_NULL_MESSAGE, SecurityConstant.ENC_DECRYPT_TITLE);
+                    Messages.showInfoMessage(project, bundle.getString(SecurityConstant.ENCRYPT_NULL_MESSAGE), bundle.getString(SecurityConstant.ENC_DECRYPT_TITLE));
                 }
             }
         }
