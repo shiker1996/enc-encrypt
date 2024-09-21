@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 public class EncryptSupport {
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("messages");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("META-INF.EncToolBundle");
 
     public static EncryptResult encrypt(String sSrc) {
         try {
