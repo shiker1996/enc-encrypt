@@ -1,4 +1,4 @@
-package tech.shiker.security;
+package tech.shiker.common;
 
 import java.nio.charset.StandardCharsets;
 
