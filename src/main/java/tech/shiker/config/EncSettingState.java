@@ -14,12 +14,13 @@ import org.jetbrains.annotations.NotNull;
 public final class EncSettingState implements PersistentStateComponent<EncSettingState> {
 
     public String decryptedType = "AES";
-    public String decryptedKey = "hi World Decrypt";
+    public String decryptedKey = "Hi World Encrypt";
     public String decryptedInformation = "AES/ECB/PKCS5Padding";
-    public String decryptedVi = null;
+    public String decryptedVi = "";
     public String isHtmlView = "Off";
     public Integer decryptedIteration = 1000;
-    public String decryptedSalt = null;
+    public String decryptedSalt = "";
+    public String decryptedProperties = "key\\b[ \\t]*:[ \\t]*";
 
     public static EncSettingState getInstance() {
         return ApplicationManager.getApplication().getService(EncSettingState.class);
