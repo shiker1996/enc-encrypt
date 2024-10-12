@@ -15,37 +15,54 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description>
         <![CDATA[
-
-<h1>描述</h1>
-<p>ENC解密工具，可以使用<a href="https://github.com/ulisesbocchio/jasypt-spring-boot" >jasypt-spring-boot</a>解密配置文件，可以在项目中使用<a href="https://github.com/ulisesbocchio/jasypt-spring-boot">jasypt-spring-boot</a>时用于文件验证</p>
-<h1>功能</h1>
-<ol>
-<li><h2>功能1-解密</h2>
-<p>支持对加密解密前后选定文件进行对比</p>
-</li>
-<li><h2>功能2-加密</h2>
-<p>1.支持对选定文本进行加密</p>
-<p>2.支持通过正则表达式对整个配置文件中匹配的属性进行加密</p>
-</li>
-<li><p>功能3-更多样式对比</p>
-</li>
-<li><p>支持的加密算法：</p> <ul> <li>AES/ECB/PKCS5Padding</li> <li>AES/ECB/NoPadding</li> <li>AES/CBC/PKCS5Padding</li> <li>AES/CBC/NoPadding</li> <li>DESede/ECB/PKCS5Padding</li> <li>DESede/ECB/NoPadding</li> <li>DESede/CBC/PKCS5Padding</li><li>DESede /CBC/NoPadding</li> <li>PBEWithMD5AndDES</li> <li>PBEWithSHA1AndDESede</li> <li>PBEWithHmacSHA256AndAES_128</li> <li>PBEWithHmacSHA512AndAES_256</li> </ul> </li>
-</ol>
-
-]]>
+            <h1>描述</h1>
+            <p>ENC解密工具，可以使用
+              <a href='https://github.com/ulisesbocchio/jasypt-spring-boot'>jasypt-spring-boot</a>解密配置文件，可以在项目中使用
+              <a href='https://github.com/ulisesbocchio/jasypt-spring-boot'>jasypt-spring-boot</a>时用于文件验证</p>
+            <h1>功能</h1>
+            <ol>
+              <li>
+                <p>功能1 - 解密</p>
+                <p>支持对选定文件加密解密前后进行比较</p>
+              </li>
+              <li>
+                <p>功能2 - 加密</p>
+                <ol>
+                  <li>支持对选定文本进行加密</li>
+                  <li>支持通过正则对整个配置文件中匹配的属性进行加密表达式</li></ol>
+              </li>
+              <li>
+                <p>功能 3 - 更多样式比较</p>
+                <p>支持算法：</p>
+                <ul>
+                  <li>AES/ECB/PKCS5Padding</li>
+                  <li>AES/ECB/NoPadding</li>
+                  <li>AES/CBC/PKCS5Padding</li>
+                  <li>AES/CBC/NoPadding</li>
+                  <li>DESede/ECB/PKCS5Padding</li>
+                  <li>DESede/ECB/NoPadding</li>
+                  <li>DESede/CBC/PKCS5Padding</li>
+                  <li>DESede /CBC/NoPadding</li>
+                  <li>PBEWithMD5AndDES</li>
+                  <li>PBEWithSHA1AndDESede</li>
+                  <li>PBEWithHmacSHA256AndAES_128</li>
+                  <li>PBEWithHmacSHA512AndAES_256</li></ul>
+              </li>
+            </ol>
+         ]]>
     </description>
     <change-notes>
         <![CDATA[
-<h2>新功能</h2>
-<ul>
-<li>支持通过正则表达式对整个配置文件中的匹配属性进行加密</li>
-<li>支持多语言</li>
-</ul>
-<h2>错误修复</h2>
-<ul>
-<li>修复了插件选项无法重置的错误</li>
-</ul>
-]]>
+            <h2>新功能</h2>
+            <ul>
+                <li>优化文本格式</li>
+                <li>支持更高版本的idea</li>
+            </ul>
+            <h2>错误修复</h2>
+            <ul>
+                <li>无</li>
+            </ul>
+        ]]>
     </change-notes>
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
