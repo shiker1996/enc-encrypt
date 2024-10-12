@@ -15,51 +15,54 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description>
         <![CDATA[
-<h1>Description</h1>
-<p>The ENC decryption tool, which can decrypt configuration files using <a href="https://github.com/ulisesbocchio/jasypt-spring-boot" >jasypt-spring-boot</a>, can be used for file verification when you use <a href="https://github.com/ulisesbocchio/jasypt-spring-boot">jasypt-spring-boot</a>  in your project</p>
-<h1>Feature</h1>
-<ol>
-<li><h2>Feature 1 - decrypt</h2>
-<p>Supports comparison of selected files before and after encryption and decryption</p>
-</li>
-<li><h2>Feature 2 - encrypt</h2>
-<p>1. Support encryption of selected text</p>
-<p>2. Supports encryption of matching attributes in the entire configuration file through regular expressions</p>
-</li>
-<li><p>Feature 3 - more style comparison</p>
-</li>
-<li><p>Supported algorithm:</p>
-<ul>
-<li>AES/ECB/PKCS5Padding</li>
-<li>AES/ECB/NoPadding</li>
-<li>AES/CBC/PKCS5Padding</li>
-<li>AES/CBC/NoPadding</li>
-<li>DESede/ECB/PKCS5Padding</li>
-<li>DESede/ECB/NoPadding</li>
-<li>DESede/CBC/PKCS5Padding</li>
-<li>DESede/CBC/NoPadding</li>
-<li>PBEWithMD5AndDES</li>
-<li>PBEWithSHA1AndDESede</li>
-<li>PBEWithHmacSHA256AndAES_128</li>
-<li>PBEWithHmacSHA512AndAES_256</li>
-</ul>
-</li>
-
-</ol>
-
-]]>
+        <h1>Description</h1>
+        <p>The ENC decryption tool, which can decrypt configuration files using
+          <a href='https://github.com/ulisesbocchio/jasypt-spring-boot'>jasypt-spring-boot</a>, can be used for file verification when you use
+          <a href='https://github.com/ulisesbocchio/jasypt-spring-boot'>jasypt-spring-boot</a>in your project</p>
+        <h1>Feature</h1>
+        <ol>
+          <li>
+            <p>Feature 1 - decrypt</p>
+            <p>Supports comparison of selected files before and after encryption and decryption</p>
+          </li>
+          <li>
+            <p>Feature 2 - encrypt</p>
+            <ol>
+              <li>Support encryption of selected text</li>
+              <li>Supports encryption of matching attributes in the entire configuration file through regular expressions</li></ol>
+          </li>
+          <li>
+            <p>Feature 3 - more style comparison</p>
+            <p>Supported algorithm:</p>
+            <ul>
+              <li>AES/ECB/PKCS5Padding</li>
+              <li>AES/ECB/NoPadding</li>
+              <li>AES/CBC/PKCS5Padding</li>
+              <li>AES/CBC/NoPadding</li>
+              <li>DESede/ECB/PKCS5Padding</li>
+              <li>DESede/ECB/NoPadding</li>
+              <li>DESede/CBC/PKCS5Padding</li>
+              <li>DESede/CBC/NoPadding</li>
+              <li>PBEWithMD5AndDES</li>
+              <li>PBEWithSHA1AndDESede</li>
+              <li>PBEWithHmacSHA256AndAES_128</li>
+              <li>PBEWithHmacSHA512AndAES_256</li></ul>
+          </li>
+        </ol>
+        ]]>
     </description>
     <change-notes>
         <![CDATA[
         <h2>New Features</h2>
-<ul>
-  <li>Supports encryption of matching attributes in the entire configuration file through regular expressions</li>
-</ul>
-<h2>Bug Fixes</h2>
-<ul>
-  <li>Fixed a bug where plugin options could not be reset</li>
-</ul>
-]]>
+        <ul>
+            <li>Optimize text formatting</li>
+            <li>Support higher idea versions</li>
+        </ul>
+        <h2>Bug Fixes</h2>
+        <ul>
+            <li>none</li>
+        </ul>
+        ]]>
     </change-notes>
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
