@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "tech.shiker"
-version = "1.4.2"
+version = "1.4.3"
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/central/' }
@@ -35,6 +35,7 @@ tasks.withType(JavaCompile).configureEach {
 patchPluginXml {
     //注意这个版本号不能高于上面intellij的version,否则runIde会报错
     sinceBuild = '231'
+    untilBuild = '243.*'
 }
 
 publishing {
